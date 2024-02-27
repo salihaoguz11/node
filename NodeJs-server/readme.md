@@ -51,3 +51,9 @@ BU dosya neyin gidip gitmemesini istedigimi belirttigim yerdir.
 .gitignore generator : toptal(google yap)
 node dosyasina uygun olani kopyala ve bu dosyanin icine yapistir.
 ```
+
+## 5- "npm i express" dosyasi ekle. Eger express kullanacaksak.
+
+```jsx
+express ile module kurarsin. Oldukca fazla dosya iner. Expressin ihtiyac duydugu dosyalarda iner.
+```

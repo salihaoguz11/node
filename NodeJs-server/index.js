@@ -80,6 +80,7 @@ const app = http.createServer((req, res) => {
   //add methods
   if (req.url == "/") {
     if (req.method == "GET") {
+      //default get
       res.write("This");
       res.write(" is ");
       res.write("home ");

@@ -12,3 +12,7 @@ const express = require("express");
 const app = express();
 
 console.log("express server");
+app.get("/", (req, res) => {
+  res.send("express deneme");
+});
+app.listen(8000, () => console.log(`server run:http//${HOST}:${PORT}`));
