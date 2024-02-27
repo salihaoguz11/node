@@ -1,5 +1,18 @@
 # NODE JS SERVER KURULUMU
 
+```jsx
+* NODE JS JS backend calisma ortamidir.
+* %60 C++ ve %40 JS ile olusturulmustur.
+* Created by Ryan Dhal in 2009
+
+Create=> POST
+ Read => GET
+ Update=>PUT
+ Delete=>DELETE
+ Patch=>Sadece degistirdigim yeri gonderiyorum.
+ Put=> Degistirsem de degistirmesem de verinin hepsini yolluyorum.
+```
+
 ## 1-Calistigimiz yere "npm init -y" komutunu indiririz.
 
 ```jsx
