@@ -16,9 +16,10 @@ const HOST = process.env?.HOST || "127.0.0.1";
 //bakar http var mi diye ama bulamazsa o zaman global'e bakar.
 
 const http = require("node:http");
+
 // Bu sekilde yazarsam yolunu kisaltmis oluyorum.
 //Bulid in oldugunu gostermis oluyorum.
-
+/*
 // http.createServer((param1, param2) => {
 //   //2 tane parametre ve call back function alir.
 //   //1.parametrenin karsilgi requesttir.Ikincinin
@@ -41,11 +42,13 @@ http
   //numarali portu kullanir. Mesela reactta genelde 3000 nolu port kullanilir.Daha sonra bir call back function yaziyoruz ve server'in calisip calismadigini kontrol ediyoruz.
   //Bu server local de calisiyor. Localin id 127.0.0.1 dir.
   .listen(8000, () => console.log(`server run:http://localhost:8000`));
+*/
 
-
-  //2.yol -best practise 
-  const app=.createServer((req, res) => {
-    res.end(`<h1>welcome to node js server</h1>`);
-    
-  })
-  app.  .listen(8000, () => console.log(`server run:http://localhost:8000`))
+//2.yol -best practise
+const app = http.createServer((req, res) => {
+  // console.log(req);
+  console.log(req.method);
+  console.log(req.url);
+  res.end(`<h1>welcome to node js server</h1>`);
+});
+app.listen(8000, () => console.log(`server run:http://localhost:8000`));
