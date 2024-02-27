@@ -47,8 +47,64 @@ http
 //2.yol -best practise
 const app = http.createServer((req, res) => {
   // console.log(req);
-  console.log(req.method);
-  console.log(req.url);
-  res.end(`<h1>welcome to node js server</h1>`);
+  // console.log(req.method);
+  // console.log(req.url);
+
+  //End Points home:/,list:/list, test:/test
+
+  // if (req.url == "/") {
+  //   res.end(`<h1>Home Page</h1>`);
+  //   // res.end(`<h1>welcome </h1>`);//burada ilk satirdaki end'i  alir bu satiri almaz.
+  //   //birinci satirdan sonra ise hata veriri.
+  // } else if (req.url == "/list") {
+  //   res.end(`<h1>List Page</h1>`);
+  // } else if (req.url == "/test") {
+  //   res.end(`<h1>Test Page</h1>`);
+  // }
+
+  //Multiple end points
+
+  // if (req.url == "/") {
+  //   res.write("This");
+  //   res.write(" is ");
+  //   res.write("home ");
+  //   res.write("page ");
+  //   res.end();
+
+  // } else if (req.url == "/list") {
+  //   res.end(`<h1>List Page</h1>`);
+  // } else if (req.url == "/test") {
+  //   res.end(`<h1>Test Page</h1>`);
+  // }
+
+  //add methods
+  if (req.url == "/") {
+    if (req.method == "GET") {
+      res.write("This");
+      res.write(" is ");
+      res.write("home ");
+      res.write("page ");
+      res.end();
+    } else if (req.method == "POST") {
+      res.statusCode = 400; //default 200
+      res.statusMessage = "You cannot post";
+      res.end("can not use this method.");
+    } else if (req.method == "DELETE") {
+      res.writeHead(405, "you can not delete", {
+        "Content-Type": "text/html",
+        "another-header": "another-content",
+      });
+      res.end("can not use this method");
+    } else res.end("can not use this method");
+  } else if (req.url == "/list") {
+    const obj = {
+      error: false,
+      message: "this is list page",
+      deneme: "deneme",
+    };
+    res.end(JSON.stringify(obj)); //objeyi json formatina ceviririz.
+  } else if (req.url == "/test") {
+    res.end(`<h1>Test Page</h1>`);
+  }
 });
 app.listen(8000, () => console.log(`server run:http://localhost:8000`));
