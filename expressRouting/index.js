@@ -61,5 +61,12 @@ app.all("/", (req, res) => {
 app.get("/ab(x)+12", (req, res) => {
   res.send({ message: " abx......x12" }); //araya istedigin kadar x gelir.
 });
+
+app.get("/ab*", (req, res) => {
+  res.send({ message: "GET method called- ab***" });//sonuna ne gelirse gelsin
+});
 */
+app.get("/a*b", (req, res) => {
+  res.send({ message: "GET method called- a***b" }); //a ile baslayip b ilke bitsin araya ne gelirse gelsin.
+});
 app.listen(PORT, HOST, () => console.log(`Server run http://${HOST}:${PORT}`));
