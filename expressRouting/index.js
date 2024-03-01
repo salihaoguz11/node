@@ -86,7 +86,12 @@ app.get(/abc/ ,(req,res)=>{ res.send({ message:"find abc  in path" })}) // başl
 //!url parameters
 /*
 //?burada : koyunca express senin parametre gonderecgini anliyor.
-//?Bundan sonrasi bir degisken ismi olarak kabul ediliyor.
+//?Bundan sonrasi bir degisken ismi olarak kabul ediliyor.Pespese birkac parametre gelebilir.
+//?aralarina (/:) koyariz.
+
+//? /:userId[\\d]+1 ve daha fazla digit olmali
+//? /:userId[\\w]+ words karakteri
+//? /:userId[\\D] digit olmayanlar.
 // http:127.0.0.1:8000/:222/location/:london //bu url"i postman yada thunder'a yazarsin.
 app.get(`/:blogId/location/:location`, (req, res) => {
   res.send({
