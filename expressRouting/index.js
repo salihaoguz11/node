@@ -73,4 +73,80 @@ app.get("/a*b", (req, res) => {
 */
 
 //!regex
+//regexr.com
+/* bunlar calismiyor!! bir hata var.
+app.get(/abc$/, (req, res) => {
+  res.send({ message: "end with any" });
+}); // sonu ne olursa olsun
+app.get(/^\/abc/ ,(req,res)=>{ res.send({ message:"start with any" })}) // başlangıç ne olursa olsun
+app.get(/\/*abc/ ,(req,res)=>{ res.send({ message:"start with any" })}) // başlangıç ne olursa olsun
+app.get(/abc/ ,(req,res)=>{ res.send({ message:"find abc  in path" })}) // başlangıç ne olursa olsun
+*/
+
+//!url parameters
+/*
+//?burada : koyunca express senin parametre gonderecgini anliyor.
+//?Bundan sonrasi bir degisken ismi olarak kabul ediliyor.
+// http:127.0.0.1:8000/:222/location/:london //bu url"i postman yada thunder'a yazarsin.
+app.get(`/:blogId/location/:location`, (req, res) => {
+  res.send({
+    blogId: req.params.blogId,
+    url: {
+      protocol: req.protocol,
+      domain: req.hostname,
+      method: req.method,
+      url: req.url,
+      path: req.path,
+      params: req.params,
+      body: req.body,
+      query: req.query,
+      header: req.headers,
+    },
+  });
+});
+*/
+
+//?baslangic ne olursa olsun
+/*
+// app.get("/", (req, res) => {
+//   res.status(200).send({
+//     message: "congrats you have signed up ",
+//   });
+// });
+
+// app.post("/", (req, res) => {
+//   res.status(201).send({ message: "POST method called" });
+// });
+
+
+app.put("/", (req, res) => {
+  res.status(202).send({ message: "PUT method called" });
+});
+
+app.delete("/", (req, res) => {
+  res.status(202).send({ message: "DELETE method called" });
+});
+*/
+
+//!redirect (sadece 300 lu kodlar)
+/* calismadi, tekrar kontrol et
+app.get("/", (req, res) => {
+  res.redirect(301, "http://google.com");
+});
+*/
+
+//!show file contents
+/*
+
+app.get('/file',(req,res)=>{
+    // __dirname bulunduğun klasör 
+    res.sendFile(__dirname+'/readme.md' ) //__dirname bulundugun klasor demek    // res.redirect(302,'/about')
+})
+//bu da calismnadi, tekrar bak
+app.get("download", (req, res) => {
+  res.download("./read.me", "express routing");
+});
+download'da baska bir isimle karsida indir dersin senin ektra verdigin isimle  karsida indir dersin
+senin  ektra verdigin isimle karsi tarafa inecek.
+*/
 app.listen(PORT, HOST, () => console.log(`Server run http://${HOST}:${PORT}`));
