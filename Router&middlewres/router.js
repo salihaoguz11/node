@@ -51,4 +51,7 @@ const router = require("./routes/index");
 //? Move to /routes/index.js:
 
 app.use(router);
+
+// app.use(require('./routes/')) //tek satirda yazimi.
+
 app.listen(8000, () => console.log(`server run:http://127.0.0.1:8000`));
