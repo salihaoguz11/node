@@ -76,7 +76,29 @@ app.get("/", (req, res, next) => {
 
 });
 
+Middleware bir gorevi de baska routelara  data gondermektir.
 
+  req.welcome = 'Welcome' //obje (req) icine property(welcome) ekliyorum
+  res.username = req.query?.username
+
+Bu sekilde de bir sonraki routeta kullaniriz.
+app.get('/', (req, res) => {
+
+    res.send({
+        // message: 'Welcome'
+        message: req?.welcome + ' to ' + res?.username
+    })
+})
+
+
+
+```
+
+### Ne zaman req ne zaman res kullanmaliyiz?
+
+```jsx
+Eger gonderdigimiz veri ciktiya hizmet ediyorsa response(ekrana yazdirma)
+Diger turlu her zaman req kullanmaliyiz.
 
 ```
 
