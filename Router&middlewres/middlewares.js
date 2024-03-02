@@ -132,6 +132,21 @@ app.get("/", (req, res) => {
 /* ------------------------------------------------------- */
 
 /* ------------------------------------------------------- */
+//? Move to file:
+
+// const middleFuncs = require('./middlewares/') // in array
+// app.use(middleFuncs)
+
+const { middleFunc1, middleFunc2 } = require("./middlewares"); // in object
+app.use(middleFunc1, middleFunc2);
+
+app.get("/*", (req, res) => {
+  res.send({
+    message1: req.message1,
+    message2: req.message2,
+    message: "Finished",
+  });
+});
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
