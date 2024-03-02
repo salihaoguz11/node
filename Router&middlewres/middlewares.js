@@ -137,7 +137,7 @@ app.get("/", (req, res) => {
 // const middleFuncs = require('./middlewares/') // in array
 // app.use(middleFuncs)
 
-const { middleFunc1, middleFunc2 } = require("./middlewares"); // in object
+const { middleFunc1, middleFunc2 } = require("./middlewares/index"); // in object
 app.use(middleFunc1, middleFunc2);
 
 app.get("/*", (req, res) => {

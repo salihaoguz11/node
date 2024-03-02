@@ -35,7 +35,11 @@ app.listen(8000, () => console.log(`server run:http://127.0.0.1:8000`));
 //?Route tanimlama 2.yontem
 /*
 //?tek bir url ye birden fazla method tanimlayabilirim.
-//?Bu sekilde butun metodlari bir araya topladik.
+//?Bu sekilde butun metodlari bir araya topladik
+
+const { middleFunc1, middleFunc2 } = require('../middlewares/')
+router.use(middleFunc1, middleFunc2)
+//Burada middleware de eklenebilir.
 //?router.route()
 router
   .route("/")
