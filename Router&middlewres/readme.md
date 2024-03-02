@@ -111,6 +111,14 @@ res.end() bunda ise benim kendimin veriryi json stringify olarak gondermem gerek
 ```
 
 ```jsx
+ It can use URL:
+app.get('/abc', [middleFunc1, middleFunc2]) // only /abc and only get
+app.use('/abc', [middleFunc1, middleFunc2])  //only /abc/*
+ and all methods -butun metodlar ve abc ile baslayan ve onun tum alt patlerinde calisir.
+
+ app.all('/*', [middleFunc1, middleFunc2])
+ yildizi yazarsak butun pathlerde gecerli. Ama app.use()icin
+ yazmaya gerek yok.
 
 ```
 
