@@ -67,9 +67,28 @@ const router = require("./path ...");
 
 ```jsx
 
+Middleware bir ara yazilimdir. Bir routerdir ama 3. parametreyi de alir. Bir routeri middleware yapan ozellik 3 parametre almasidir. Burada parametrelerin isimleri degil siralari onemlidir.
+
+app.get("/", (req, res, next) => {
+  console.log("Middeware started.");
+  // Go to next route:
+  next();// en sonda yazilir.
+
+});
+
+
+
+```
+
+## res.send() & res.end()
+
+```jsx
 res.send() veriyi json olarak gondermek cok kolay. Veriyi hem string hemde istersek kolayca json olarak gonderebiliriz.
 res.send('message:"get"') bu sekilde string olarak gondeririz.
 res.end() bunda ise benim kendimin veriryi json stringify olarak gondermem gerekir. Daha zahmetlidir.
+```
+
+```jsx
 
 ```
 
