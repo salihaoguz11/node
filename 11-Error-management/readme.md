@@ -26,7 +26,33 @@ JSON objenin string halidir.Gelen ve giden data her zaman stringdir.Bu yuzden ob
 
 ```
 
+## Express Error Handler
+
 ```jsx
+Surekli try-catch blogu yazarak hata yonetimi yapmak oldukca zahmetlidir. Tam bu noktada express bize bir
+fonksiyon imkani saglar. Hatayi bizim icin otomatik olarak yakalar. Bu fonksiyonun adi Error Handler dir.
+
+
+app.get("/*", (req, res) => {
+  throw new Error("Error Message");
+});
+
+const errorHandler = (err, req, res, next) => {
+  res.send({
+    error: true,
+    message: err.message,
+  });
+};
+
+app.use(errorHandler);
+
+Error Handler bir middlewaredir. 4 parametre alir ve error parametresi en basa gelir.
+Error Handler kullaninca muhakkak app.use 'e bildirmek gerekir.
+Error Handler  her zaman en son gelen middleware olmalidir.
+Error handler next() kullanmayiz. Sebebi ise hata olunca devam etmesin istiyoruz.
+Ama fonksiyona next ekleriz. Middleware oldugundan dolayi next ekleriz. Parametrelerin sirasi karismasin diye
+next'i kullanmasam da ekleriz.
+
 
 ```
 
