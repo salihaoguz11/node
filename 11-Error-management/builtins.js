@@ -18,6 +18,7 @@ app.use(express.text());
 //? Accept Form-Data:
 // extended must be define. (if true, it supported nested form-data.)
 app.use(express.urlencoded({ extended: true }));
+//Bu kod olmadan form datayi alamaz.
 
 //* Allow staticfiles:
 // Call staticFiles from real-path
@@ -25,7 +26,7 @@ app.use("/static", express.static("./public/images"));
 
 app.all("/", (req, res) => {
   res.send({
-    body: req.body,
+    body: req.body, // bu sekidle gonderilmis bir veriyi alabiliyorum.
     message: "Hello",
   });
 });

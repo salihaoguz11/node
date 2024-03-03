@@ -104,5 +104,13 @@ etmem yeterlidir.
 ```
 
 ```jsx
+'Node js' te body kismina yazip gonderilen veriyi almak
+cok zordur. Node js ancak veriyi bir olay ile yakalar.
+Node js olay tabanlidir. JS de ki onClick gibi bir olayla ancak yakalayabilir.
+Ham 'node js' ile backend yazmak cok zordur. express js islemleri kolaylastirir.
+Express ile bir veriyi almak icin 'app.use(express.json())' demek yeterlidir.
+Bu sekilde express alir ve veriyi objeye cevirir.
+
+'Express' micro framework'tur. Yani sadece temel ihtiyaclari giderir.
 
 ```
