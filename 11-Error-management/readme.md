@@ -46,21 +46,31 @@ const errorHandler = (err, req, res, next) => {
 
 app.use(errorHandler);
 
-Error Handler bir middlewaredir. 4 parametre alir ve error parametresi en basa gelir.
-Error Handler kullaninca muhakkak app.use 'e bildirmek gerekir.
-Error Handler  her zaman en son gelen middleware olmalidir.
-Error handler next() kullanmayiz. Sebebi ise hata olunca devam etmesin istiyoruz.
+
+
+
+
+```
+
+```jsx
+*Error Handler bir middlewaredir. Ayni zamanda da bir route'tur.
+*4 parametre alir ve error parametresi en basa gelir.
+*Error Handler kullaninca muhakkak app.use 'e bildirmek gerekir.
+*Error Handler  her zaman en son gelen middleware olmalidir. Sayfanin altina yazilir.
+*Error handler next() kullanmayiz. Sebebi ise hata olunca devam etmesin istiyoruz.
 Ama fonksiyona next ekleriz. Middleware oldugundan dolayi next ekleriz. Parametrelerin sirasi karismasin diye
 next'i kullanmasam da ekleriz.
 
-
 ```
 
 ```jsx
+RES ve REQ ile datalari tasiyabilirim.
+Hata yonetimide her zaman STATUS CODE onemlidir.
 
-```
+Eger  res & req  => Route
+Eger  res & req & next => Middleware
+Eger  err & res & req & next   => errorHandler
 
-```jsx
 
 ```
 

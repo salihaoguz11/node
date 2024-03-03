@@ -69,16 +69,26 @@ app.get("/user/:id", (req, res) => {
 /* ------------------------------------------------------- */
 
 app.get("/*", (req, res) => {
+  res.errorStatusCode = 404; // basina res yazarak baska bir yerde cagirabilirim.
+  //Bu sekilde disari cikarabilirim.
   throw new Error("Error Message");
 });
 
 const errorHandler = (err, req, res, next) => {
   console.log("errorHandler started.");
-  res.send({
+  const errorStatusCode = res?.errorStatusCode || 500;
+
+  res.status(errorStatusCode).send({
+    //status kodu da yolluyorum.
     error: true,
     message: err.message,
+    cause: err.cause,
+    stack: err.stack, // terminalde yazmasini bekledigim hatayi  gostermek icin kullanilir.
   });
 };
+
+//? for run errorHandler call in use.
+//? It must be at last middleware.
 app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
 /* ------------------------------------------------------- *
 /* ------------------------------------------------------- */
