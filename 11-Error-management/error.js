@@ -66,7 +66,9 @@ app.get("/user/:id", (req, res) => {
 /* ------------------------------------------------------- */
 
 //*Error Handler
-/* ------------------------------------------------------- */
+//? errorHandler is middleware and has must be four parameters. (error, request, response, next)
+
+/* ------------------------------------------------------- *
 
 app.get("/*", (req, res) => {
   res.errorStatusCode = 404; // basina res yazarak baska bir yerde cagirabilirim.
@@ -82,7 +84,74 @@ const errorHandler = (err, req, res, next) => {
     //status kodu da yolluyorum.
     error: true,
     message: err.message,
-    cause: err.cause,
+  });
+};
+
+//? for run errorHandler call in use.
+//? It must be at last middleware.
+app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
+/* ------------------------------------------------------- */
+
+/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
+
+app.get("/", (req, res) => {
+  throw new Error("Error Message");
+});
+
+app.get("/user/:id", (req, res, next) => {
+  const id = req.params.id || 0;
+  try {
+    if (isNaN(id)) {
+      throw new Error("ID is not a number");
+    } else {
+      res.send({
+        message: "OK",
+        id,
+      });
+    }
+  } catch (err) {
+    // next içinde bir hata objesi gönderirsek, errorHandler yakalar.
+    next(err);
+
+    // res.send({
+    //   error: true,
+    //   message: err.message,
+    // });
+  }
+});
+
+const errorHandler = (err, req, res, next) => {
+  console.log("errorHandler started.");
+  const errorStatusCode = res?.errorStatusCode || 500;
+
+  res.status(errorStatusCode).send({
+    //status kodu da yolluyorum.
+    error: true,
+    message: err.message,
+  });
+};
+
+//? for run errorHandler call in use.
+//? It must be at last middleware.
+app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
+/* ------------------------------------------------------- */
+
+/* ------------------------------------------------------- */
+app.get("/*", (req, res) => {
+  res.errorStatusCode = 404;
+  throw new Error("Error Message", { cause: "No reason" }); //bir obje olarak yazilir
+});
+
+const errorHandler = (err, req, res, next) => {
+  console.log("errorHandler started.");
+  const errorStatusCode = res?.errorStatusCode || 500;
+
+  res.status(errorStatusCode).send({
+    //status kodu da yolluyorum.
+    error: true,
+    message: err.message,
+    cause: err.cause, // yukarida cause tanimlandi ve burada cagiririz.
     stack: err.stack, // terminalde yazmasini bekledigim hatayi  gostermek icin kullanilir.
   });
 };
@@ -90,10 +159,8 @@ const errorHandler = (err, req, res, next) => {
 //? for run errorHandler call in use.
 //? It must be at last middleware.
 app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
-/* ------------------------------------------------------- *
 /* ------------------------------------------------------- */
-/* ------------------------------------------------------- */
-/* ------------------------------------------------------- */
+
 /* ------------------------------------------------------- */
 //? errorHandler:
 //? It must be at last middleware.
