@@ -92,7 +92,6 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
 /* ------------------------------------------------------- */
 
-/* ------------------------------------------------------- */
 /* ------------------------------------------------------- *
 
 app.get("/", (req, res) => {
@@ -137,7 +136,7 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
 /* ------------------------------------------------------- */
 
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 app.get("/*", (req, res) => {
   res.errorStatusCode = 404;
   throw new Error("Error Message", { cause: "No reason" }); //bir obje olarak yazilir
@@ -151,7 +150,7 @@ const errorHandler = (err, req, res, next) => {
     //status kodu da yolluyorum.
     error: true,
     message: err.message,
-    cause: err.cause, // yukarida cause tanimlandi ve burada cagiririz.
+    cause: err.cause, // yukarida cause tanimlandi ve burada cagiririz. Yukarida belirtilmezse calismaz.
     stack: err.stack, // terminalde yazmasini bekledigim hatayi  gostermek icin kullanilir.
   });
 };
@@ -159,6 +158,27 @@ const errorHandler = (err, req, res, next) => {
 //? for run errorHandler call in use.
 //? It must be at last middleware.
 app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
+/* ------------------------------------------------------- */
+
+//?Asyncrone Error Handling
+/* ------------------------------------------------------- */
+const asyncFunction = async () => {
+  throw new Error("Error in async-function");
+};
+//*Bir asyncrone fonksiyonu baska bir fonksiyonda kullanacaksam onun da asycrone olmasi gerekir ve
+//*ve icinde await kullanmam gerekir.
+
+//? Control with catch(next)
+app.get("/async", async (req, res, next) => {
+  // await asyncFunction() // eger bu sekilde yazarsam fonksiyon ascync
+  //oldugu icin cevabini beklemeden devam ediyor ve hata geride kaliyor ve sistem dagiliyor.
+  // bunu engellemek icin then ve catch kullaniyoruz.
+
+  // await asyncFunction().then().catch((err) => { next(err) })) // Catch error by errorHandler.
+  await asyncFunction().then().catch(next); // Catch error by errorHandler.
+});
+
+/* ------------------------------------------------------- */
 /* ------------------------------------------------------- */
 
 /* ------------------------------------------------------- */
