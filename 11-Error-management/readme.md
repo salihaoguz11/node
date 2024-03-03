@@ -74,7 +74,32 @@ Eger  err & res & req & next   => errorHandler
 
 ```
 
+## Asyncrone Error Handling
+
 ```jsx
+Bir asyncrone fonksiyonu baska bir fonksiyonda kullanacaksam onun da asycrone olmasi gerekir ve
+ve icinde await kullanmam gerekir.
+app.get("/async", async (req, res, next) => {
+
+  await asyncFunction()  eger bu sekilde yazarsam fonksiyon ascync
+  oldugu icin cevabini beklemeden devam ediyor ve hata geride kaliyor ve onu da
+  takip edemedigi icin  sistem dagiliyor.
+   bunu engellemek icin then ve catch kullaniyoruz.
+
+  await asyncFunction().then().catch(next); // Catch error by errorHandler.
+  Next ile errorHandler'a yonledirriz.
+});
+Bu problemi cozmek icin ise express-async-errors indirip otomatik
+takip saglayabiliriz.
+```
+
+## npm i express-async-errors
+
+```jsx
+Bizim icin async islemleri kolaylastirir.Bu module  benim yapimda ki
+async hatalari otomatik olarak errorHandler'a havale eder.Bu modulu kullanmak icin require()
+etmem yeterlidir.
+
 
 ```
 

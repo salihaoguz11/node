@@ -161,7 +161,7 @@ app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
 /* ------------------------------------------------------- */
 
 //?Asyncrone Error Handling
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 const asyncFunction = async () => {
   throw new Error("Error in async-function");
 };
@@ -171,14 +171,59 @@ const asyncFunction = async () => {
 //? Control with catch(next)
 app.get("/async", async (req, res, next) => {
   // await asyncFunction() // eger bu sekilde yazarsam fonksiyon ascync
-  //oldugu icin cevabini beklemeden devam ediyor ve hata geride kaliyor ve sistem dagiliyor.
+  //oldugu icin cevabini beklemeden devam ediyor ve hata geride kaliyor ve onu da
+  //takip edemedigi icin  sistem dagiliyor.
   // bunu engellemek icin then ve catch kullaniyoruz.
 
   // await asyncFunction().then().catch((err) => { next(err) })) // Catch error by errorHandler.
-  await asyncFunction().then().catch(next); // Catch error by errorHandler.
+  await asyncFunction().then().catch(next); // Catch error by errorHandler. Next ile errorHandler'a yonledirriz.
 });
 
+const errorHandler = (err, req, res, next) => {
+  console.log("errorHandler started.");
+  const errorStatusCode = res?.errorStatusCode || 500;
+
+  res.status(errorStatusCode).send({
+    //status kodu da yolluyorum.
+    error: true,
+    message: err.message,
+    cause: err.cause, // yukarida cause tanimlandi ve burada cagiririz. Yukarida belirtilmezse calismaz.
+    stack: err.stack, // terminalde yazmasini bekledigim hatayi  gostermek icin kullanilir.
+  });
+};
+
+//? for run errorHandler call in use.
+//? It must be at last middleware.
+app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
+
 /* ------------------------------------------------------- */
+
+//* npm i express-async-errors (indir) - async hatalari otomatik takip eder.
+//* ve error handler'a gonderir.
+/* ------------------------------------------------------- */
+
+require("express-async-errors");
+
+app.get("/async", async (req, res, next) => {
+  throw new Error("Error in async-function");
+});
+const errorHandler = (err, req, res, next) => {
+  console.log("errorHandler started.");
+  const errorStatusCode = res?.errorStatusCode || 500;
+
+  res.status(errorStatusCode).send({
+    //status kodu da yolluyorum.
+    error: true,
+    message: err.message,
+    cause: err.cause, // yukarida cause tanimlandi ve burada cagiririz. Yukarida belirtilmezse calismaz.
+    stack: err.stack, // terminalde yazmasini bekledigim hatayi  gostermek icin kullanilir.
+  });
+};
+
+//? for run errorHandler call in use.
+//? It must be at last middleware.
+app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
+
 /* ------------------------------------------------------- */
 
 /* ------------------------------------------------------- */
