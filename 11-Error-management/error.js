@@ -200,7 +200,7 @@ app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
 
 //* npm i express-async-errors (indir) - async hatalari otomatik takip eder.
 //* ve error handler'a gonderir.
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 
 require("express-async-errors");
 
@@ -226,9 +226,16 @@ app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
 
 /* ------------------------------------------------------- */
 
+//* Moving errorHandler to other page
 /* ------------------------------------------------------- */
+
+require("express-async-errors"); // bunu yazmazsan calismaz.
+app.get("/async", async (req, res, next) => {
+  throw new Error("Error in async-function");
+});
 //? errorHandler:
 //? It must be at last middleware.
-// app.use(require("./errorHandler"));
+app.use(require("./errorHandler")); // Bu sekilde baska sayfada ki
+//errorHandler middleware cagiririrm.
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
