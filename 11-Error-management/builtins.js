@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.text());
 //? Accept Form-Data:
 // extended must be define. (if true, it supported nested form-data.)
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 //Bu kod olmadan form datayi alamaz.Array'i  algilamasi icin true yapiyoruz.
 
 //* Allow staticfiles:

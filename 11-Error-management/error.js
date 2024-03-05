@@ -2,7 +2,7 @@
 //* npm i express  dotenv
 //* gitignore
 //*echo PORT=8000> .env
-//*nodemon error.toJSON()
+//*nodemon error.js
 
 "use strict";
 /* -------------------------------------------------------/
@@ -10,15 +10,16 @@
     ------------------------------------------------------- */
 const express = require("express");
 const app = express();
+// const app = require("express")();
 
 require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- *
 app.get("/", (req, res) => {
-  // console.log(abc)
+  console.log(abc);
   //burada ust satiri yazinca hata verecek ve terminal dolacak ve hata thunder da html olarak gelecek.
-  //   throw new Error("Error Message");
+  throw new Error("Error Message");
   //sistemin kendi kendine hata vermesini istemeyiz.Bunu bizim istedigimiz sekilde ayarlamamiz gerekiyor.
   res.send("Hello");
 });
@@ -27,7 +28,7 @@ app.get("/", (req, res) => {
 
 /* ------------------------------------------------------- *
 app.get("/user/:id", (req, res) => {
-  const id = req.params.id || 0; //id d'yi req icerisinden aliyoruz.
+  const id = req.params.id || 0; //id yi req icerisinden aliyoruz.
   if (isNaN(id)) {
     throw new Error("ID is not a number");
   } else {
@@ -40,12 +41,12 @@ app.get("/user/:id", (req, res) => {
 
 /* ------------------------------------------------------- */
 
-//?sistemin istedigimiz gibi hata verm,esi icin try-catch kullanabiliriz
+//?sistemin istedigimiz gibi hata vermesi icin try-catch kullanabiliriz
 /* ------------------------------------------------------- *
 app.get("/user/:id", (req, res) => {
   const id = req.params.id || 0; //id d'yi req icerisinden aliyoruz.
   // try blogu icine hata alma ihtimali oldugum blok yazilir
-  //catch blogu icine ise hata alirsam yapacklarim komutunu yazarim.
+  //catch blogu icine ise hata alirsam yapacaklarim komutunu yazarim.
   try {
     if (isNaN(id)) {
       throw new Error("ID is not a number");
@@ -145,7 +146,7 @@ app.get("/*", (req, res) => {
 const errorHandler = (err, req, res, next) => {
   console.log("errorHandler started.");
   const errorStatusCode = res?.errorStatusCode || 500;
-
+  console.log(err);
   res.status(errorStatusCode).send({
     //status kodu da yolluyorum.
     error: true,
@@ -170,11 +171,10 @@ const asyncFunction = async () => {
 
 //? Control with catch(next)
 app.get("/async", async (req, res, next) => {
-  // await asyncFunction() // eger bu sekilde yazarsam fonksiyon ascync
+  // await asyncFunction(); // eger bu sekilde yazarsam fonksiyon ascync
   //oldugu icin cevabini beklemeden devam ediyor ve hata geride kaliyor ve onu da
   //takip edemedigi icin  sistem dagiliyor.
   // bunu engellemek icin then ve catch kullaniyoruz.
-
   // await asyncFunction().then().catch((err) => { next(err) })) // Catch error by errorHandler.
   await asyncFunction().then().catch(next); // Catch error by errorHandler. Next ile errorHandler'a yonledirriz.
 });
@@ -227,11 +227,13 @@ app.use(errorHandler); // bunun eklemezsek app'in haberi olmaz ve fonk calismaz.
 /* ------------------------------------------------------- */
 
 //* Moving errorHandler to other page
-/* ------------------------------------------------------- */
+/* ------------------------------------------------------- *
 
 require("express-async-errors"); // bunu yazmazsan calismaz.
 app.get("/async", async (req, res, next) => {
-  throw new Error("Error in async-function");
+  throw new Error("Error in async-function", {
+    cause: "Ilknur's error message",
+  });
 });
 //? errorHandler:
 //? It must be at last middleware.

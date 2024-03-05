@@ -8,7 +8,7 @@ echo HOST =127.0.0.1 >> .env
  2 tane >> alt satira ekleme yapar
 
 cat > .env
-bos bir alana surukler ve icine istediklerimizi yazariz. cat ile birden fazla satir ekleriz.
+bos bir alana surukler ve icine istediklerimizi yazariz.
 Cat ile birden fazla satir ekleriz. daha sonra Ctrl+C ile cikariz.
 
 touch router.js
