@@ -61,12 +61,12 @@ const Todo = sequelize.define("todos", {
     // -1: Low, 0: Norm, 1: High
     type: DataTypes.TINYINT,
     allowNull: false,
-    default: 0,
+    defaultValue: 0,
   },
   isDone: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    default: false,
+    defaultValue: false,
   },
 
   //? Not need define createdAt & updatedAt fields.
