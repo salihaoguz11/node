@@ -4,8 +4,6 @@
 
 ##
 
-##
-
 ## MVC / Model View Controller
 
 ```jsx
@@ -57,16 +55,35 @@ JSON ise  alis veris verisidir.
 
 ```
 
+## app.all() ile app.use() farklari.
+
 ```jsx
+        app.all()                                       app.use()
+URL tanimlandigi gibidir.                    URL olarak anasayfa tanimlandiysa
+Yani anasayfa tanimlandiysa                  anasayfa ve devam eden butun URL lerde calisir.
+sadece orada gecerlidir.                     ('/abc') calisir.
+('/abc') calismaz.
+Butun metodlara izin verir.                  Butun metodlara izin verir.
+```
+
+#SEQUELIZE
+
+```jsx
+Butun veri tabanlarina destek veren bir ORM  moduludur.
+Bunu kullaninca ORM + MODEL yapisini kullanabilir.
+npm install sequelize sqlite3 diyerek modulumu ve kullancagim veri tabanimi ekliyorum.
+sequelize => ORM modulum
+sqlite3   => veri tabanim/database
+
 
 ```
 
-```jsx
-
-```
+## NEDEN SEQUELIZE KULLANIYORUM?
 
 ```jsx
-
+1-Model yapisi kurmak icin.
+2-ORM yapisini kullanabilmek icin.
+ORM mantigiyla haberlesmek ve database'e baglanmak icin.
 ```
 
 ```jsx
