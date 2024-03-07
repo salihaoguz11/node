@@ -25,6 +25,17 @@ app.use(router); //routers larin en altina  yaz.
 findByPk(); //Primary key yani id ye gore getirir.
 findOne(); // Buldugu ilk kayidi getirir.
 findAndCountAll(); // Hem veri sayisini hemde verileri dondurur.
+
+UPDATE VE DELETE'te data guncellendikten sonra ki hali degil,kac adet
+guncelleme yapildiysa o gelir.
+
+DELETE - destroy
+Saece kac tane sildigini gosterir.
+204 status code doner ama ekrana veri gostermez.
+Eger silme islemi olursa 1 doner olmazsa ise 0 doner.
+
+ Cursorla bir yeri tikla ve asagi in Shift tusuna basili tutup baska
+ yeri tikla aradaki blogu kolyaca silersin
 ```
 
 ##
