@@ -52,7 +52,10 @@ kolaylikla cevirebilirim.
 ```jsx
 Obje bir veri yapisidir.
 JSON ise  alis veris verisidir.
-
+MONGOOSE => MONGODB ORM yapisidir.
+SEQUELIZE => SQL ORM yapisidir.
+Package json da dosyamizin adi main ise ve biz app yada farkli ise pj'da
+adini degistirmek gerekir.
 ```
 
 ## app.all() ile app.use() farklari.
@@ -74,8 +77,9 @@ Bunu kullaninca ORM + MODEL yapisini kullanabilir.
 npm install sequelize sqlite3 diyerek modulumu ve kullancagim veri tabanimi ekliyorum.
 sequelize => ORM modulum
 sqlite3   => veri tabanim/database
-
-
+sqlite dosya gibi cagrilip kullanabilen bir veri tabanidir.
+Rahatlikla tasinabilir bir dosyadir.
+Mobil uygulamalarda kullanilabilir.
 ```
 
 ## NEDEN SEQUELIZE KULLANIYORUM?
@@ -86,9 +90,70 @@ sqlite3   => veri tabanim/database
 ORM mantigiyla haberlesmek ve database'e baglanmak icin.
 ```
 
+##Sequelize ile bir model olusturma
+
+```jsx
+1-Define metodu ile modul olusturma
+const { Sequelize, DataTypes } = require('sequelize')
+
+ sequelize instance oluştur:
+const sequelize = new Sequelize('sqlite:./db.sqlite3')
+
+define methodu sequelize modeli oluşturur:
+ her bir model, veritabanında bir tabloya denk gelir.
+
+ sequelize.define('tableName', {  modelDetails  })
+
+ Not need define createdAt & updatedAt fields.
+ createdAt ve updatedAt tanımlamaya gerek yoktur. Sequelize otomatik oluşturur/yönetir.
+  createdAt create islemi  yapilinca tarihi otomatik olusturur.
+  updatedAt  tarihi update eder.
+```
+
+```jsx
+2-Syncronization:
+Model bilgilerini Database uygun hale getirme.
+Terminalde ki yazilarin degistigini ve artik SQL diline dondugunu goreceksin.
+Bu komut surekli acik kalmamali. Islem tamalninca hemen yoruma almak lazim.
+Acik kalirsa surekli calisir.
+
+ sequelize.sync() // CREATE TABLE
+ sequelize.sync({ force: true }) // DROP TABLE & CREATE TABLE
+ sequelize.sync({ alter: true }) // TO BACKUP & DROP TABLE & CREATE TABLE & FROM BACKUP
+
+```
+
+```jsx
+3- Connect to db:Database'e baglanma
+sequelize.authenticate()
+    .then(() => console.log('* DB Connected *'))
+    .catch(() => console.log('* DB Not Connected *'))
+
+Bu son islemnden sonra artik modelim hazir.
+Modeli baz alarak CRUD islemleri yapacagim.
+Todo tablomun standartlarini da belirledim (Field kismi)
+Artik bu standratlara uymami model yonetecek ve standart disina cikmama engel olacak.
+```
+
+##
+
 ```jsx
 
 ```
+
+##
+
+```jsx
+
+```
+
+##
+
+```jsx
+
+```
+
+##
 
 ```jsx
 
