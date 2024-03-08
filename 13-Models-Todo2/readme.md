@@ -50,8 +50,6 @@ Eger silme islemi olursa 1 doner olmazsa ise 0 doner.
 
 ```
 
-##
-
 ```jsx
 
 ```
