@@ -4,7 +4,7 @@
 ------------------------------------------------------- */
 
 const mongoose = require("mongoose");
-
+/* -------------------------------------------------------
 // const nameSchema= new mongoose.Schema({fields},{tablo adi})
 const nameSchema = new mongoose.Schema(
   {
@@ -17,8 +17,51 @@ const nameSchema = new mongoose.Schema(
       type: String,
       default: null,
       trim: true,
-      unique: false,
+      unique: true,
+      select: false, // model cagrildiginda gelsin mi?
+      index: false, //aramalarda erisimi hizlandirir.
+      required: true, // veri girisi gerekli mi?
+      required: [true, "error message"], // gerekli mi?,hata mesaji
+      enum: [[1, 2, 3], "error message"], // belirli bir pattern, bunun disinda girilirse hata verir.
+      validate: [
+        function (data) {
+          return true;
+        },
+        "error message",
+      ], // veriyi function ile dogrulama
+      get: function (data) {
+        return true;
+      }, //veriyi cagirirken caliscak funcsion
+      set: function (data) {
+        return true;
+      }, //veriyi kaydederken caliscak funcsion
     },
   },
-  {}
+  {
+  collection:'collectionName',//tablo ismi 
+  timestamps:true // create yapinca objenin kayit tarihini ve o obje uzerinde bir degisiklik yaptiginizda 
+  //tarihi tutuyor.Otomatik olarak yapar.
+
+
+  }
+);
+------------------------------------------------------- */
+
+const blogPostSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    content: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  {
+    collection: "BlogPost",
+    timestamps: true,
+  }
 );
