@@ -49,6 +49,7 @@ const nameSchema = new mongoose.Schema(
 
 const blogPostSchema = new mongoose.Schema(
   {
+    //categoryId
     title: {
       type: String,
       trim: true,
@@ -65,3 +66,10 @@ const blogPostSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// mongoose.model('model ismi','hangi sema')
+const BlogPostModel = mongoose.model("BlogPost", blogPostSchema);
+
+module.exports = {
+  BlogPost: BlogPostModel,
+};
