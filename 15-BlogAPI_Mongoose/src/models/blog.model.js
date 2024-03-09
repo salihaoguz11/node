@@ -30,10 +30,10 @@ const nameSchema = new mongoose.Schema(
         "error message",
       ], // veriyi function ile dogrulama
       get: function (data) {
-        return true;
+        return data;
       }, //veriyi cagirirken caliscak funcsion
       set: function (data) {
-        return true;
+        return data;
       }, //veriyi kaydederken caliscak funcsion
     },
   },
