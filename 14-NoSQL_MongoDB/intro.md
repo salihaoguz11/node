@@ -49,21 +49,3 @@ Coloumn          =>         Fields
 * MongoDB de db ve collection isimleri soyuttur.
 
 ```
-
-###
-
-```jsx
-
-```
-
-###
-
-```jsx
-
-```
-
-###
-
-```jsx
-
-```
