@@ -38,10 +38,20 @@ Eger silme islemi olursa 1 doner olmazsa ise 0 doner.
  yeri tikla aradaki blogu kolyaca silersin
 ```
 
-##
+## Bir POST islemi yapilinca
 
 ```jsx
-
+* Server takip eder => app.listen
+* Veriyi yakalar.
+* JSON veriyi alir ve objeye cevirir.Ve req.body'e atama yapar.
+* Router devreye girer.
+Ana URL'e post methodu ile data gonderdin
+* Controller'a giderim create gecerim
+Data islemi yapacaksam modele gonderirim
+* Modele giderim
+Model datayi standarda uygun secilde kayit yapar.
+* Yol boyunca eger hata olursa errorHandler devreye girer.
+* Butun isleri CONTROLLER yapar ve isler butun onda son bulur.
 ```
 
 ##
