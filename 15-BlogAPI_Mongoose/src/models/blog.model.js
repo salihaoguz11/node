@@ -31,10 +31,10 @@ const nameSchema = new mongoose.Schema(
       ], // veriyi function ile dogrulama
       get: function (data) {
         return data;
-      }, //veriyi cagirirken caliscak funcsion
+      }, //veriyi cagirirken caliscak function
       set: function (data) {
         return data;
-      }, //veriyi kaydederken caliscak funcsion
+      }, //veriyi kaydederken caliscak function
     },
   },
   {
@@ -60,16 +60,22 @@ const blogPostSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    //  createdAt, automatically created by mongoose
+    //  updatedAt
   },
   {
-    collection: "BlogPost",
+    collection: "blogPost",
     timestamps: true,
   }
 );
 
 // mongoose.model('model ismi','hangi sema')
-const BlogPostModel = mongoose.model("BlogPost", blogPostSchema);
+// const BlogPostModel = mongoose.model("BlogPost", blogPostSchema);
+
+// module.exports = {
+//   BlogPost: BlogPostModel,
+// };
 
 module.exports = {
-  BlogPost: BlogPostModel,
+  BlogPost: mongoose.model("BlogPost", blogPostSchema),
 };

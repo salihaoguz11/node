@@ -22,6 +22,8 @@ require("./src/dbConnection"); // app use demedik. Bir defa calisacak ve bitecek
 app.all("/", (req, res) => {
   res.send("Welcome to blog Api");
 });
-app.use(require("./src/errorHandler")); // her zaman asagida olur.
+app.use("/blog", require("./src/routes/blog.route.js"));
+
+app.use(require("./src/errorHandler.js")); // aşağıda kalsın
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log(`Running: http://${HOST}:${PORT}`));
