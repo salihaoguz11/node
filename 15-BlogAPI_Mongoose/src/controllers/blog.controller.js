@@ -3,7 +3,8 @@
 /*                     BLOG API CONTROLLERS               */
 /* ====================================================== */
 
-require("express-async-errors"); // error' takip edecek.
+require("express-async-errors");
+
 const { BlogPost } = require("../models/blog.model");
 
 // module.exports={
@@ -29,28 +30,28 @@ module.exports.BlogPost = {
       body: req.body,
       data: data,
     });
-    //http://127.0.0.1:8000/blog/posts/ index'te router cagirirken blog ekledik o sebeble araya blog eklemeyi unutmuyoruz.
+  },
+  read: async (req, res) => {
+    const data = await BlogPost.find({ _id: req.params.postId });
+    res.status(202).send({
+      error: false,
+      data: data,
+    });
   },
   update: async (req, res) => {
     const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body);
+    const newdata = await BlogPost.find({ _id: req.params.postId });
     res.status(202).send({
       error: false,
       body: req.body,
       data: data, // info about update
-    });
-  },
-  read: async (req, res) => {
-    const data = await blogPost.find({ _id: req.params.postId });
-    res.status(202).send({
-      error: false,
-      data: data,
+      // güncel veriyi istiyorsan tekrar çağır
+      newdata: newdata,
     });
   },
   delete: async (req, res) => {
-    const data = await BlogPost.find();
-    res.status(200).send({
-      error: false,
-      data: data,
-    });
+    const data = await BlogPost.deleteOne({ _id: req.params.postId });
+    // console.log(data);
+    res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
   },
 };

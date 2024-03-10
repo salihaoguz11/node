@@ -23,7 +23,7 @@ app.all("/", (req, res) => {
   res.send("Welcome to blog Api");
 });
 app.use("/blog", require("./src/routes/blog.route.js"));
-
+//blog path'ine istek atildigi zaman seklinde yaziyoruz.
 app.use(require("./src/errorHandler.js")); // aşağıda kalsın
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log(`Running: http://${HOST}:${PORT}`));
