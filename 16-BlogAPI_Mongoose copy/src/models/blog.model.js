@@ -89,6 +89,8 @@ const blogPostSchema = new mongoose.Schema(
     published: {
       type: Boolean,
       default: true, // bu blog yazisi yayinlansin mi? drafta almasin.
+      //default'u sonradan datama ekledigim halde gordu. sebebi
+      //default true yapmamdi.
     },
     //  createdAt, automatically created by mongoose
     //  updatedAt

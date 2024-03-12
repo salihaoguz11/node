@@ -27,3 +27,4 @@ app.use("/blog", require("./src/routes/blog.route.js"));
 app.use(require("./src/middlewares/errorHandler.js")); // aşağıda kalsın
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log(`Running: http://${HOST}:${PORT}`));
+// require("./src/sync")();
