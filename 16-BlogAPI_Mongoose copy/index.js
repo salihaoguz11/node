@@ -15,7 +15,7 @@ const HOST = process.env.HOST;
 app.use(express.json()); //yukarida kalmali.
 
 //!DB Connection
-require("./src/dbConnection"); // app use demedik. Bir defa calisacak ve bitecek.
+require("./src/configs/dbConnection.js"); // app use demedik. Bir defa calisacak ve bitecek.
 /* ------------------------------------------------------- */
 /* ------------------------------------------------------- */
 
@@ -24,6 +24,6 @@ app.all("/", (req, res) => {
 });
 app.use("/blog", require("./src/routes/blog.route.js"));
 //blog path'ine istek atildigi zaman seklinde yaziyoruz.
-app.use(require("./src/errorHandler.js")); // aşağıda kalsın
+app.use(require("./src/middlewares/errorHandler.js")); // aşağıda kalsın
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log(`Running: http://${HOST}:${PORT}`));

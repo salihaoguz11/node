@@ -4,7 +4,23 @@
 ------------------------------------------------------- */
 
 const mongoose = require("mongoose");
-/* -------------------------------------------------------
+
+//BLOG CATEGORY:
+const blogCategorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  {
+    collection: "blogCategory",
+    timestamps: true,
+  }
+);
+
+/* -------------------------------------------------------*
 // const nameSchema= new mongoose.Schema({fields},{tablo adi})
 const nameSchema = new mongoose.Schema(
   {
@@ -77,5 +93,6 @@ const blogPostSchema = new mongoose.Schema(
 // };
 
 module.exports = {
+  BlogCategory: mongoose.model("BlogCategory", blogCategorySchema),
   BlogPost: mongoose.model("BlogPost", blogPostSchema),
 };
