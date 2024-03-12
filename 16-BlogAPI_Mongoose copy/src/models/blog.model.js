@@ -66,6 +66,16 @@ const nameSchema = new mongoose.Schema(
 const blogPostSchema = new mongoose.Schema(
   {
     //categoryId
+    blogCategoryId: {
+      //js de object Id diye bir data type yok O yuzden mongoose un kendisinden faydalaniyoruz.
+
+      type: mongoose.Schema.Types.ObjectId, // ForeignKey, RelationalID
+      ref: "BlogCategory", //bu sekilde BlogCategory id sidir diye belirtmis oluyorum.
+      //ref tanimlayinca blogCat. baglamis oluyor. Sistem bunu algiliyor.
+      //ref yazdigim isim model ismi ile ayni olmali.
+      //Bu iliski 1-to -many  iliskidir.
+      required: true,
+    },
     title: {
       type: String,
       trim: true,
@@ -75,6 +85,10 @@ const blogPostSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+    },
+    published: {
+      type: Boolean,
+      default: true, // bu blog yazisi yayinlansin mi? drafta almasin.
     },
     //  createdAt, automatically created by mongoose
     //  updatedAt
