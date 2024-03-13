@@ -18,6 +18,8 @@ const mongoose = require("mongoose");
 //     return crypto.pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString('hex')
 // }
 
+//Password Encrypt call:
+const passwordEncrypt = require("../helpers/passwordEncrypt");
 // Schema:
 
 const UserSchema = new mongoose.Schema({

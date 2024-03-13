@@ -94,9 +94,20 @@ Hatta node: yazinca sistem bana onerir.
 
 ```
 
+### .env
+
 ```jsx
 . ile baslayan dosya gizli doyadir. ve .env dosyasi gitignore tarafindan gizlenir.
 Eger yollamak istiyorsak .env-sample olarak yazrsak gorunur.
 Bu sekilde github'a yollayabiliriz.
+
+```
+
+### Ne zaman app.use() ne zaman require kullanilir?
+
+```jsx
+app.use( )
+kullnacaksam ya route yada middleware olmali, ozetle icinde req,res olmali
+
 
 ```
