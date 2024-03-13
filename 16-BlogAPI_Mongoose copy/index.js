@@ -17,12 +17,14 @@ app.use(express.json()); //yukarida kalmali.
 //!DB Connection
 require("./src/configs/dbConnection.js"); // app use demedik. Bir defa calisacak ve bitecek.
 /* ------------------------------------------------------- */
+
 /* ------------------------------------------------------- */
 
 app.all("/", (req, res) => {
   res.send("Welcome to blog Api");
 });
-app.use("/blog", require("./src/routes/blog.route.js"));
+app.use("/blog", require("./src/routes/blog.router.js"));
+app.use("/user", require("./src/routes/user.router.js"));
 //blog path'ine istek atildigi zaman seklinde yaziyoruz.
 app.use(require("./src/middlewares/errorHandler.js")); // aşağıda kalsın
 /* ------------------------------------------------------- */

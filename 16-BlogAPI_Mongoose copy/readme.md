@@ -14,9 +14,16 @@ Sonra yoruma aliriz.
 
 ```
 
-###
+### Neden Mongoose kullaniyorum?
 
 ```jsx
+Mongo DB bir veri tabanidir ve bize bir standart sunmaz.
+Data standardini koruyan ise mongoose dir. Mongoose bir ORM moduludur.
+Mongoose'u model mantigi icin kullaniyorum
+Mongoose da model yazmak icin sema yazarsin, sonra model olusturursun.
+Sema 2 parametre alir.
+1. parametre  => Field
+2. parametre => ayarlar bolumu
 
 ```
 
