@@ -70,9 +70,3 @@ Logutta get kullanabiliriz.
 ```jsx
 
 ```
-
-###
-
-```jsx
-
-```
