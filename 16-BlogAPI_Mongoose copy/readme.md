@@ -27,8 +27,68 @@ Sema 2 parametre alir.
 
 ```
 
-###
+### Validation email
 
 ```jsx
+Validate bir fonksiyondur. Validasyon gecer true doner yada gecmez ve false olur.
+Gelen veri arrow function ile yakalanir.
+  validate: [
+      (email) => email.includes("@") && email.includes("."),
+      "Email type is incorrect",
+    ],
+
+```
+
+### Validation password
+
+```jsx
+Veri tabani hacklenme durumunda benim user passwordunun
+ele gecirilemmeis icin benim onu sifreli bir sekilde yollamam lazim.
+
+
+password: {
+  type: String,
+  trim: true,
+  required: true,
+  // set: (password) => { return password + '123' },
+  // set: function (password) { return password + '123' },
+  set: (password) => passwordEncrypt(password)
+  // set: passwordEncrypt
+  set bir fonk dur.
+  Set fonk ciktisi veri tabanina yazilir. Sen ne ayarlarsan fonk ciktisi
+  ne olursa olsun senin yolladigin degeri kayit ediyor.
+  Nu methodu kullanarak sifreleme islemi yapilabilir.
+},
+
+PBKDF2 kullanici sifrelerini sifrelemek icin kullanilan bir metoddur.
+Sadece node js'e ozel degildir.
+
+Islem su sekilde olur.
+password -> Sifrelemek istedigim sifreyi
+salt -> bir anahtarla
+iterations -> kac sefer meseela 1000 kere - JS 10_000 yazmayi destekliyor.
+keylen -> bana ciktiyi su kadar karakterde ver.Mesela 64 karakter ver
+digest->su sifreleme algoritmasi kullan mesela 'sha512' gibi. Bircok cesidi var.
+returns->
+
+const passwordEncrypt = function (password) {
+    return crypto.pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString('hex')
+}
+pbkdf2Sync => senkron method bunun async olani da var.
+toString('hex') => string yapiyoruz ve okunabilecek type olsun diye hex decimal olarak
+ceviyoruz.
+
+```
+
+### Cripto
+
+```jsx
+
+Node js 'te cripto modlu icindedir bu metod. Crripto bir built-in methoddur.
+
+BUILT-IN METHOD: Node ile otomatik gelen metodlardir. Ektra indirmeye gerek yok.
+Hatta node: yazinca sistem bana onerir.
+ const crypto = require('node:crypto')
+ Bu sekilde direk cagirilir.
 
 ```

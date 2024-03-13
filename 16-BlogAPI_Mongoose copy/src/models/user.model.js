@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     // unique: [true, 'Email must be unique.'], // Not support
     // required: true,
-    required: [true, "Email is required."],
+    required: [true, "Email is required."], // hata mesaji da yollayabilirim bu sekilde.
     // validate: (email) => { return true },
     // validate: [
     //     (email) => {
@@ -39,9 +39,22 @@ const UserSchema = new mongoose.Schema({
     //     'Email type is incorrect'
     // ],
     validate: [
+      //short hand
       (email) => email.includes("@") && email.includes("."),
       "Email type is incorrect",
     ],
+  },
+
+  password: {
+    type: String,
+    trim: true,
+    required: true,
+    // set: (password) => { return password + '123' },
+    // set: function (password) { return password + '123' },
+    set: (password) => passwordEncrypt(password), //set bir fonk dur.
+    //Set fonk ciktisi veri tabanina yazilir. Sen ne ayarlarsan fonk ciktisi
+    //ne olursa olsun senin yolladigin degeri kayit ediyor.
+    // set: passwordEncrypt
   },
 });
 
