@@ -54,7 +54,7 @@ const UserSchema = new mongoose.Schema({
     set: (password) => passwordEncrypt(password), //set bir fonk dur.
     //Set fonk ciktisi veri tabanina yazilir. Sen ne ayarlarsan fonk ciktisi
     //ne olursa olsun senin yolladigin degeri kayit ediyor.
-    // set: passwordEncrypt
+    // set: passwordEncrypt //short hand
   },
 });
 

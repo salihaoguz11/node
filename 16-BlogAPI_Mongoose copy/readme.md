@@ -84,11 +84,19 @@ ceviyoruz.
 
 ```jsx
 
-Node js 'te cripto modlu icindedir bu metod. Crripto bir built-in methoddur.
+Node js 'te cripto modulu icindedir bu metod. Cripto bir built-in methoddur.
+Bunu kullanarak PBKDF2 sifreleme yapiyorum.
 
 BUILT-IN METHOD: Node ile otomatik gelen metodlardir. Ektra indirmeye gerek yok.
 Hatta node: yazinca sistem bana onerir.
  const crypto = require('node:crypto')
  Bu sekilde direk cagirilir.
+
+```
+
+```jsx
+. ile baslayan dosya gizli doyadir. ve .env dosyasi gitignore tarafindan gizlenir.
+Eger yollamak istiyorsak .env-sample olarak yazrsak gorunur.
+Bu sekilde github'a yollayabiliriz.
 
 ```
