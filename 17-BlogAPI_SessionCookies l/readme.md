@@ -55,34 +55,24 @@ Cookies'e kayit yapinca sistemin genelinden ulasabilirim.
 Mesela anasayfa URL den de ulasirsin.
 ```
 
-### Cripto
+### LOGIN - LOGOUT ISLEMLERI
 
 ```jsx
+* GET data yollamayiz ve guvenligi onemsiz islemlerde kullanilir.
 
-Node js 'te cripto modulu icindedir bu metod. Cripto bir built-in methoddur.
-Bunu kullanarak PBKDF2 sifreleme yapiyorum.
+Logutta get kullanabiliriz.
 
-BUILT-IN METHOD: Node ile otomatik gelen metodlardir. Ektra indirmeye gerek yok.
-Hatta node: yazinca sistem bana onerir.
- const crypto = require('node:crypto')
- Bu sekilde direk cagirilir.
 
 ```
 
-### .env
+###
 
 ```jsx
-. ile baslayan dosya gizli doyadir. ve .env dosyasi gitignore tarafindan gizlenir.
-Eger yollamak istiyorsak .env-sample olarak yazrsak gorunur.
-Bu sekilde github'a yollayabiliriz.
 
 ```
 
-### Ne zaman app.use() ne zaman require kullanilir?
+###
 
 ```jsx
-app.use( )
-kullnacaksam ya route yada middleware olmali, ozetle icinde req,res olmali
-
 
 ```
