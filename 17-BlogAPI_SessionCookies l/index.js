@@ -19,6 +19,22 @@ require("./src/configs/dbConnection.js"); // app use demedik. Bir defa calisacak
 /* ------------------------------------------------------- */
 
 /* ------------------------------------------------------- */
+// SessionCookies:
+// http://expressjs.com/en/resources/middleware/cookie-session.html
+// https://www.npmjs.com/package/cookie-session
+//* $ npm i cookie-session
+
+const session = require("cookie-session");
+app.use(
+  session({
+    secret: process.env.SECRET_KEY, // sifreleme anahtari
+    // maxAge: 1000 * 60 * 60 * 24 * 3  // miliseconds // 3 days
+  })
+);
+
+/* ------------------------------------------------------- */
+
+/* ------------------------------------------------------- */
 
 app.all("/", (req, res) => {
   res.send("Welcome to blog Api");
