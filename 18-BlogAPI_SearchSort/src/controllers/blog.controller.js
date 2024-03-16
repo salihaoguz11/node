@@ -60,12 +60,27 @@ module.exports.BlogCategory = {
 };
 
 module.exports.BlogPost = {
-  /* FILTERING & SEARCHING & SORTING & PAGINATION */
-
-  /* FILTERING & SEARCHING & SORTING & PAGINATION */
-
   list: async (req, res) => {
-    const data = await BlogPost.find();
+    /* FILTERING & SEARCHING & SORTING & PAGINATION */
+    // FILTERING:
+    // URL?filter[key1]=value1&filter[key2]=value2
+    // console.log(req.query);
+    const filter = req.query?.filter || {};
+    // console.log(filter);
+
+    // SEARCHING:
+    // URL?search[key1]=value1&search[key2]=value2
+    // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+
+    const search = req.query?.search || {};
+    console.log(search);
+    //{ title: 'test', content: 'test' } -> { title: { $regex: 'test' }, content: { $regex: 'test' } }
+    for (let key in search) {
+      search[key] = { $regex: search[key] };
+    }
+    console.log(search);
+    /* FILTERING & SEARCHING & SORTING & PAGINATION */
+    const data = await BlogPost.find(filter);
     res.status(200).send({
       error: false,
       data: data,

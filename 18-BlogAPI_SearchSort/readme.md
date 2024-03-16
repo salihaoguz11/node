@@ -20,38 +20,73 @@ queries key-value seklinde yazilir. Yani aralarinda " = " olmalidir.aralarina & 
 Mesela search[title]=test search ana basligim, title icinde test ara diyorum.
 URL sisteminde false yada true yazamazin ,onun yerine 1-0 kullanilir. 1-true,0-false temsil eder.
 
-```
+URL de query'i almanin uolu req.query yazmaktir.
+   console.log(req.query); yazinca bize donen veri su sekildedir: Query verisi object olarak gelir.
 
-###
-
-```jsx
-
-app.use(session({
-    secret: process.env.SECRET_KEY, // Şifreleme anahtarı
-    // maxAge: 1000 * 60 * 60 * 24 * 3  // miliseconds // 3 days
-}))
-
-secret => bu parametre sifreleme anahtaridir.
-maxAge => Milisecond cinsinden yapar.1000 - 1 saniye yapar.
-
-app.use() kullandigim icin global alanda ayar yapmis olurum.
-Ve maxAge verince artik session olmaz cunku bir omur bicmis oluruz.
-Cookies'e kayit yapinca sistemin genelinden ulasabilirim.
-Mesela anasayfa URL den de ulasirsin.
-```
-
-### LOGIN - LOGOUT ISLEMLERI
-
-```jsx
-* GET data yollamayiz ve guvenligi onemsiz islemlerde kullanilir.
-
-Logutta get kullanabiliriz.
+   {
+  search: {
+    title: 'test',
+    content: 'testsort[createdAt]=asc',
+    createdAt: '2024'
+  }
 
 
 ```
 
-###
+### FILTER
 
 ```jsx
+   const filter= req.query?.filter || {}
+   bu sekilde filter'i bir degiskene atariz ve
+   find icine yerlestirirz. Yani filter icinde ne gelmisse find onu filtreler.
+       const data = await BlogPost.find(filter);
+    res.status(200).send({
+      error: false,
+      data: data,
+    });
+  },
+
+```
+
+### SEARCHING ICINDE ARAMA
+
+```jsx
+
+ const search = req.query?.search || {};
+    console.log(search);
+    { title: 'test 0' }
+    eger bu sekilde find icine koyarsam birebir arama yapar. Title'i test 0 olan degil de title icinde test 0 aramam lazim.Bunun icin regex (regular expression) kullanmamiz gerekecek.
+    Bana verinin regexli formatta gelmesi lazim.
+     { title: 'test', content: 'test' } -> { title: { $regex: 'test' },
+     content: { $regex: 'test' } }
+
+         for(let key in search){
+     search[key]={$regex:search[key]}
+    }
+
+    search icinde ki verileri bir for dongusene sokuyorum ve her bir elemanin onune regex koymus oluyorum.
+
+    console.log(search);
+    { title: { '$regex': 'test 0' } } ve console da bu sekilde geliyor.
+
+
+
+```
+
+### THUNDER DENEMELER
+
+```jsx
+http://127.0.0.1:8000/blog/posts?search[title]=test&filter[published]=1&sort[createdAt]=asc
+
+http://127.0.0.1:8000/blog/posts?sort[createdAt]=asc&search[createdAt]=2024
+
+http://127.0.0.1:8000/blog/posts?search[title]=test&search[content]=testsort[createdAt]=asc&search[createdAt]=2024
+
+http://127.0.0.1:8000/blog/posts?filter[blogCategoryId]=65f5fe0c608f1f0e3d07bb46
+
+http://127.0.0.1:8000/blog/posts?filter[title]=test 1 title
+title' i filtrele ve test 1 title olanlari getir.
+
+
 
 ```
