@@ -80,7 +80,9 @@ module.exports.BlogPost = {
     }
     console.log(search);
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
-    const data = await BlogPost.find(filter);
+    // const data = await BlogPost.find(filter);
+    // const data = await BlogPost.find(search);
+    const data = await BlogPost.find({ ...filter, ...search });
     res.status(200).send({
       error: false,
       data: data,

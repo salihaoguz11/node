@@ -70,6 +70,9 @@ URL de query'i almanin uolu req.query yazmaktir.
     { title: { '$regex': 'test 0' } } ve console da bu sekilde geliyor.
 
 
+     const data = await BlogPost.find({...filter,...search});
+Bu sekilde hem search hemde filter kullanmis olurum. Destructuring yaptim. Spread yapmis olduk.
+
 
 ```
 
@@ -84,9 +87,15 @@ http://127.0.0.1:8000/blog/posts?search[title]=test&search[content]=testsort[cre
 
 http://127.0.0.1:8000/blog/posts?filter[blogCategoryId]=65f5fe0c608f1f0e3d07bb46
 
+filtre de denemeler
+
 http://127.0.0.1:8000/blog/posts?filter[title]=test 1 title
 title' i filtrele ve test 1 title olanlari getir.
 
+http://127.0.0.1:8000/blog/posts?search[title]=test 1
+
+http://127.0.0.1:8000/blog/posts?filter[published]=1&search[title]=test 1&search[content]=test 10
+publish olanlari getir,title icinde test 1 ara,content icinde de test 10 ara.
 
 
 ```
