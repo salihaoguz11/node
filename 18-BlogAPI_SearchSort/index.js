@@ -39,10 +39,20 @@ app.use(
 app.all("/", (req, res) => {
   res.send("Welcome to blog Api");
 });
+//Middlewares
+// Check logined User:
+// app.use(require("./src/middlewares/userControl"));
+// Filter, Search, Sort, Pagination:
+app.use(require("./src/middlewares/errorHandler.js"));
+app.use(require("./src/middlewares/findSearchSortPage.js"));
+
+/* ------------------------------------------------------- */
+
 app.use("/blog", require("./src/routes/blog.router.js"));
 app.use("/user", require("./src/routes/user.router.js"));
 //blog path'ine istek atildigi zaman seklinde yaziyoruz.
-app.use(require("./src/middlewares/errorHandler.js")); // aşağıda kalsın
+/* ------------------------------------------------------- */
+
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log(`Running: http://${HOST}:${PORT}`));
 // require("./src/sync")();

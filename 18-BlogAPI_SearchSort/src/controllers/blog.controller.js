@@ -17,7 +17,8 @@ const { BlogPost, BlogCategory } = require("../models/blog.model");
 
 module.exports.BlogCategory = {
   list: async (req, res) => {
-    const data = await BlogCategory.find();
+    // const data = await BlogCategory.find();
+    const data = await res.getModelList(BlogCategory);
     res.status(200).send({
       error: false,
       data: data,
@@ -111,6 +112,7 @@ module.exports.BlogPost = {
     console.log("skip", skip);
 
     /* FILTERING & SEARCHING & SORTING & PAGINATION */
+
     // const data = await BlogPost.find(filter);
     // const data = await BlogPost.find(search);
     // const data = await BlogPost.find({ ...filter, ...search });
@@ -118,12 +120,16 @@ module.exports.BlogPost = {
     // const data = await BlogPost.find({ ...filter, ...search })
     //   .sort(sort)
     //   .limit(limit);
-    const data = await BlogPost.find({ ...filter, ...search })
-      .sort(sort)
-      .skip(skip)
-      .limit(limit);
+    // const data = await BlogPost.find({ ...filter, ...search })
+    //   .sort(sort)
+    //   .skip(skip)
+    //   .limit(limit);
+
+    const data = await res.getModelList(BlogPost, "blogCategoryId");
+
     res.status(200).send({
       error: false,
+      details: await res.getModelListDetails(BlogPost),
       data: data,
     });
   },

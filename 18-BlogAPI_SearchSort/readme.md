@@ -113,8 +113,33 @@ Page:
     console.log(page);
 
 
+```
+
+###
+
+```jsx
+Blog icin listte bircok sorgu yaptik ama bunu her zaman yapamayiz.Mesela blogCategory de sayi cok yuksek olabilir ve bunu tek tek yazamam. Bunu baska sayfaya tasimak en mantiklisidir. Middleware olmasi mantiklidir. Veriyi URL den cekecegiz ve benim bu URL'e ulasmam gerekir. Yani req parametresine ihtiyacim var. O sebeple middleware yapiyoruz.
+
+ res.getModelListDetails = async (Model) => {
+    }
+Bunun icin res. bir fonksiyon atiyoruz ve bu sekilde dinamik bir sekilde parametre olarak model isimlerimizi yollayabiliyoruz.
 
 
+* Middleware daha sonra app.use de cagiririz.
+app.use(require("./src/middlewares/findSearchSortPage.js"));
+Artik benim getModelListDetails fonksiyonum ilgili yerden cagrilabilecek.
+Artik butun route yada controllerlardan cagirilabilir.
+```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
 
 ```
 

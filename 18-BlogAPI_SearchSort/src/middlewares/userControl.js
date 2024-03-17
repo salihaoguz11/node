@@ -8,7 +8,7 @@
 
 const User = require("../models/user.model");
 
-module.export = async (req, res, next) => {
+module.exports = async (req, res, next) => {
   if (req?.session?.id) {
     const { id, password } = req.session;
 
