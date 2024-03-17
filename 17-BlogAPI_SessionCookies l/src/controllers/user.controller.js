@@ -55,10 +55,11 @@ module.exports = {
 
     if (email && password) {
       // const user = await User.findOne({ email: email })
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }); //user modelde emaili buna esit emaili ara.
 
       if (user && user.password == passwordEncrypt(password)) {
         // user.password db'de ki sifre ile sifreli kullanici sifresi ayni mi diye bakar.
+        // Her sefereinde sifreleme ayni sekilde yapilir.
         // Buraya direk password yazamayiz, cunku o direk sifresiz olarak bulunur.
 
         /* SESSION */
@@ -96,7 +97,7 @@ module.exports = {
   },
   logout: async (req, res) => {
     // Session destroy:
-    req.session = null;
+    req.session = null; //verileri silersin
     res.status(200).send({
       error: false,
       massage: "Logout OK",

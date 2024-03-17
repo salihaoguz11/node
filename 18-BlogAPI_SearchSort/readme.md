@@ -57,7 +57,8 @@ URL de query'i almanin uolu req.query yazmaktir.
  const search = req.query?.search || {};
     console.log(search);
     { title: 'test 0' }
-    eger bu sekilde find icine koyarsam birebir arama yapar. Title'i test 0 olan degil de title icinde test 0 aramam lazim.Bunun icin regex (regular expression) kullanmamiz gerekecek.
+    eger bu sekilde find icine koyarsam birebir arama yapar. Title'i test 0 olan
+     degil de title icinde test 0 aramam lazim.Bunun icin regex (regular expression) kullanmamiz gerekecek.
     Bana verinin regexli formatta gelmesi lazim. Regex ile datanin icinde ifadeyi ariyor.
      { title: 'test', content: 'test' } -> { title: { $regex: 'test' },
      content: { $regex: 'test' } }
@@ -115,10 +116,14 @@ Page:
 
 ```
 
-###
+### MIDDLEWARE
 
 ```jsx
-Blog icin listte bircok sorgu yaptik ama bunu her zaman yapamayiz.Mesela blogCategory de sayi cok yuksek olabilir ve bunu tek tek yazamam. Bunu baska sayfaya tasimak en mantiklisidir. Middleware olmasi mantiklidir. Veriyi URL den cekecegiz ve benim bu URL'e ulasmam gerekir. Yani req parametresine ihtiyacim var. O sebeple middleware yapiyoruz.
+Blog icin listte bircok sorgu yaptik ama bunu her zaman yapamayiz.
+Mesela blogCategory de sayi cok yuksek olabilir ve bunu tek tek yazamam.
+ Bunu baska sayfaya tasimak en mantiklisidir. Middleware olmasi mantiklidir.
+  Veriyi URL den cekecegiz ve benim bu URL'e ulasmam gerekir.
+   Yani req parametresine ihtiyacim var. O sebeple middleware yapiyoruz,fonksiyon yapmiyoruz.
 
  res.getModelListDetails = async (Model) => {
     }
@@ -131,9 +136,13 @@ Artik benim getModelListDetails fonksiyonum ilgili yerden cagrilabilecek.
 Artik butun route yada controllerlardan cagirilabilir.
 ```
 
-###
+### POPULATE
 
 ```jsx
+.populate() ile foreign keyin bilgilerine de ulasiriz.
+Referansta belirttigimiz isimden dolayi populate f.k tanimis olur.
+.populate(ilgili field ismi)
+
 
 ```
 

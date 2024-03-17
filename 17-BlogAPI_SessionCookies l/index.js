@@ -34,10 +34,27 @@ app.use(
 
 /* ------------------------------------------------------- */
 
+// Check logined User:
+app.use(require("./src/middlewares/userControl"));
+
 /* ------------------------------------------------------- */
 
 app.all("/", (req, res) => {
-  res.send("Welcome to blog Api");
+  // res.send("Welcome to blog Api");
+  if (req.isLogin) {
+    res.send({
+      error: false,
+      message: "WELCOME BLOG API PROJECT",
+      session: req.session,
+      user: req.user,
+    });
+  } else {
+    res.send({
+      error: false,
+      message: "WELCOME BLOG API PROJECT",
+      session: req.session,
+    });
+  }
 });
 app.use("/blog", require("./src/routes/blog.router.js"));
 app.use("/user", require("./src/routes/user.router.js"));

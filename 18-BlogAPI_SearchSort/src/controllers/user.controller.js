@@ -57,6 +57,15 @@ module.exports = {
       // const user = await User.findOne({ email: email })
       const user = await User.findOne({ email });
 
+      /* SESSION *
+      console.log(user); //donen data asagida ki gibi 
+      {
+        _id: new ObjectId('65f7223fbceae5f1f57e247b'),
+        email: 'deneme1@gmail.com',
+        password: '133bb722cdb5b6f3d01d5d6a12a39155fa9778a62f0a1c8bb7785a5dd6e82359',
+        __v: 0
+      }
+        /* SESSION */
       if (user && user.password == passwordEncrypt(password)) {
         // user.password db'de ki sifre ile sifreli kullanici sifresi ayni mi diye bakar.
         // Buraya direk password yazamayiz, cunku o direk sifresiz olarak bulunur.
@@ -80,6 +89,7 @@ module.exports = {
           // remind me secerse user, 3 gun boyunca veriler  kayitli olsun
         }
         /* COOKIE */
+
         res.status(200).send({
           error: false,
           message: "Login OK",

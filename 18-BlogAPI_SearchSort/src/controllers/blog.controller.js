@@ -124,7 +124,7 @@ module.exports.BlogPost = {
     //   .sort(sort)
     //   .skip(skip)
     //   .limit(limit);
-
+    // const data = await BlogPost.find().populate('blogCategoryId')
     const data = await res.getModelList(BlogPost, "blogCategoryId");
 
     res.status(200).send({
@@ -142,7 +142,9 @@ module.exports.BlogPost = {
     });
   },
   read: async (req, res) => {
-    const data = await BlogPost.find({ _id: req.params.postId });
+    const data = await BlogPost.findOne({ _id: req.params.postId }).populate(
+      "blogCategoryId" //field ismi
+    );
     res.status(202).send({
       error: false,
       data: data,
