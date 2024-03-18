@@ -67,14 +67,14 @@ module.exports.BlogPost = {
     // URL?filter[key1]=value1&filter[key2]=value2
     // console.log(req.query);
     const filter = req.query?.filter || {};
-    // console.log(filter);
+    console.log(filter);
 
     //! SEARCHING:
     // URL?search[key1]=value1&search[key2]=value2
     // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
 
     const search = req.query?.search || {};
-    // console.log(search);
+    console.log(search);
     for (let key in search) {
       //?{ title: 'test', content: 'test' } -> { title: { $regex: 'test' }, content: { $regex: 'test' } }
       // search['title'] = { $regex: search['title'] }
@@ -94,13 +94,14 @@ module.exports.BlogPost = {
 
     // Limit:Sayfa basi kac kayit getirecegiz.
     let limit = Number(req.query?.limit);
-    // console.log(limit);
+    console.log(limit);
     // limit = limit > 0 ? limit : 20;
     limit = limit > 0 ? limit : Number(process.env.PAGE_SIZE || 20);
     console.log("limit", limit);
 
     //! Page:
     let page = Number(req.query?.page);
+    [1, 2, 3, 4, 5];
     // page = page > 0 ? page : 1;
     page = page > 0 ? page - 1 : 0; // Backend 'de sayfa sayısı her zmaan page-1 olarak hesaplanmalı.
     console.log("page", page);
@@ -129,7 +130,7 @@ module.exports.BlogPost = {
 
     res.status(200).send({
       error: false,
-      details: await res.getModelListDetails(BlogPost),
+      // details: await res.getModelListDetails(BlogPost),
       data: data,
     });
   },

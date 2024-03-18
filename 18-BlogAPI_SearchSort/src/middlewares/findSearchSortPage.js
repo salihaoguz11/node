@@ -3,7 +3,7 @@
 /*                     BLOG API                           */
 /* ====================================================== */
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
   // FILTERING:
@@ -53,9 +53,13 @@ module.exports = (req, res, next) => {
 
   /* FILTERING & SEARCHING & SORTING & PAGINATION */
 
-  // const data = await BlogPost.find({ ...filter, ...search }).sort(sort).skip(skip).limit(limit)
+  // const data = await BlogPost.find({ ...filter, ...search })
+  //   .sort(sort)
+  //   .skip(skip)
+  //   .limit(limit);
 
   res.getModelList = async function (Model, populate = null) {
+    //blogCategoryId
     return await Model.find({ ...filter, ...search })
       .sort(sort)
       .skip(skip)
