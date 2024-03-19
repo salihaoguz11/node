@@ -6,7 +6,7 @@ const Personnel = require("../models/personnel.model");
 
 module.exports = {
   list: async (req, res) => {
-    const data = await res.getModelList(Personnel, departmentId);
+    const data = await res.getModelList(Personnel);
     res.status(200).send({
       error: false,
       detail: await res.getModelListDetails(Personnel),
@@ -15,6 +15,18 @@ module.exports = {
   },
 
   create: async (req, res) => {
+    //isLead controll:\
+    const isLead = req.body?.isLead || false;
+    if (isLead) {
+      const updateIsLead = await Personnel.updateMany(
+        {
+          //get all department personnels who have isLead true and update with false
+          departmentId: req.body?.departmentId,
+          isLead: true,
+        },
+        { isLead: false }
+      );
+    }
     const data = await Personnel.create(req.body);
     res.status(201).send({
       error: false,
@@ -31,6 +43,23 @@ module.exports = {
   },
 
   update: async (req, res) => {
+    // isLead Control:
+    const isLead = req.body?.isLead || false;
+    if (isLead) {
+      const { departmentId } = await Personnel.findOne(
+        { _id: req.params.id },
+        { departmentId: 1 }
+      );
+      await Personnel.updateMany(
+        {
+          //get all department personnels who have isLead true and update with false
+          departmentId,
+          isLead: true,
+        },
+        { isLead: false }
+      );
+    }
+
     const data = await Personnel.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });

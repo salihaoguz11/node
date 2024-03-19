@@ -15,7 +15,7 @@ const DepartmentSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "departmjents",
+    collection: "departments",
     timestamps: true,
   }
 );
