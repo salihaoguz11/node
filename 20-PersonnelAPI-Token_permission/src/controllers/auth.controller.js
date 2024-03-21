@@ -77,5 +77,12 @@ module.exports = {
     const auth = req.headers?.authorization || null;
 
     /* TOKEN */
+
+    res.status(200).send({
+      error: false,
+      // message: 'Logout: Sessions Deleted.',
+      message: "Logout: Token Deleted.",
+      deleted,
+    });
   },
 };
