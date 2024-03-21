@@ -69,12 +69,18 @@ module.exports = {
     /* TOKEN */
     //* 1. Yöntem (Kısa yöntem)
     //? Her kullanıcı için sadece 1 adet token var ise (tüm cihazlardan çıkış yap):
-    const deleted = await Token.deleteOne({ userId: req.user._id });
+    // const deleted = await Token.deleteOne({ userId: req.user._id });
 
     //* 2. Yöntem:
     //? Her kullanıcı için 1'den fazla token var ise (çoklu cihaz):
 
     const auth = req.headers?.authorization || null;
+    const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']
+
+    let deleted = null;
+    if (tokenKey && tokenKey[0] == "Token") {
+      deleted = await Token.deleteOne({ token: tokenKey[1] });
+    }
 
     /* TOKEN */
 
