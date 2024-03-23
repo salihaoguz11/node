@@ -29,6 +29,16 @@ const { dbConnection } = require("./src/configs/dbConnection");
 dbConnection();
 
 /* ------------------------------------------------------- */
+/* ------------------------------------------------------- */
+//* MORGAN LOGGING
+// https://expressjs.com/en/resources/middleware/morgan.html
+// https://github.com/expressjs/morgan
+//? $ npm i morgan
+
+const morgan = require("morgan");
+
+/* ------------------------------------------------------- */
+
 // Middlewares:
 
 // Accept JSON:
