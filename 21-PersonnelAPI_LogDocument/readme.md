@@ -118,7 +118,8 @@ Bunun express js de kisa yolu vardir.
  swaggerAutogen.js
 
  Daha sonra  yeni terminal ac ve "node swaggerAutogen.js"  yazarak terminalde calistir. Her sey yolundaysa
-kendisi swagger json dosyasi olusturur. Benim icin kolayca olusturdu.
+kendisi swagger json dosyasi olusturur. Benim icin kolayca olusturdu. Bir degisiklik yaparsan terminali
+durdur ve daha sonra tekrar ayni kod ile calsitir ki degiskligi algilasin.
 
 
 
@@ -127,6 +128,7 @@ kendisi swagger json dosyasi olusturur. Benim icin kolayca olusturdu.
 ###
 
 ```jsx
+
  SWAGGER: index sayfasinda bu kod blogunu yazariz
 const swaggerUi = require('swagger-ui-express')
 const swaggerJson = require('./swagger.json')
@@ -148,6 +150,7 @@ app.use("/documents/json", (req, res) => {
   res.sendFile("swagger.json", { root: "." }); //bir dosya icerigini ekrana basiyoruz.
 });
  { root: "." } => dosyayi anadizinde ara.
+ Ben json olrark ekrana basrsam FE istedigi yerde acip bakabilir.
 
 ```
 
@@ -156,16 +159,48 @@ app.use("/documents/json", (req, res) => {
 ```jsx
 const redoc = require("redoc-express");
 app.use(
-  "/documents/redoc",
-  redoc({
+  "/documents/redoc", //url
+  redoc({ // obje olarak ayarlar yaziyorum.
     title: "PersonnelAPI",
-    specUrl: "/documents/json",
+    specUrl: "/documents/json", // bu ayar onemli. Bu json'dan alacak veriyi.
   })
 );
+
+   specUrl: "/documents/json",
+    bu ayar onemli. Bu json'dan alacak veriyi.
+    Jsonda once yayinlamam lazim.
+
 ```
 
 ###
 
 ```jsx
+Daha sonra controller'a giderek bu asagida ki kod blogunu ekliyorum.
+ #swagger bu sekilde yazinca swagger # ile yakaliyor. Bunlar yorum satinin icinde olmali.
+
+   /*
+            #swagger.tags = ['Authentication']      => grup ismi
+            #swagger.summary = 'Login'              =>ozet baslik,ufak aciklama
+            #swagger.description = 'Login with username and password' => genis aciklama
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: 'true',
+                schema: {
+                    username: "testF0",
+                    password: "1234"
+                }
+            }
+        */
+
+        #swagger.parameters  =>  Bazen parametreleri otomatik yakalar ama bazen yakalamaz. Manual yazariz.
+        Yakalayamazsa swagger da canli test ortami imkani vermez.
+
+    * token.contoller.js sayfasina git. Ilgili yerlere yapistir.
+    Bu sayfada ki bilgilerin gorunmesine gerek yok.
+
+         /*
+            _swagger.deprecated = true  // _ basa koyarsan swagger algilamaz.
+            #swagger.ignore = true     // swagger bunu almasin dersen ignore yapiyorsun
+        */
 
 ```

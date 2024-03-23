@@ -156,6 +156,14 @@ app.all("/", (req, res) => {
     // session: req.session,
     // isLogin: req.isLogin,
     user: req.user,
+    api: {
+      documents: {
+        swagger: "http://127.0.0.1:8000/documents/swagger",
+        redoc: "http://127.0.0.1:8000/documents/redoc",
+        json: "http://127.0.0.1:8000/documents/json",
+      },
+      contact: "contact@clarusway.com",
+    },
   });
 });
 

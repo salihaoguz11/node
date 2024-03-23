@@ -6,6 +6,9 @@ const Personnel = require("../models/personnel.model");
 
 module.exports = {
   list: async (req, res) => {
+    /*
+            #swagger.tags = ["Personnels"]
+        */
     const data = await res.getModelList(Personnel, {}, "departmentId");
 
     res.status(200).send({
@@ -16,6 +19,9 @@ module.exports = {
   },
 
   create: async (req, res) => {
+    /*
+            #swagger.tags = ["Personnels"]
+        */
     // isLead Control:
     const isLead = req.body?.isLead || false;
     if (isLead) {
@@ -34,6 +40,9 @@ module.exports = {
   },
 
   read: async (req, res) => {
+    /*
+            #swagger.tags = ["Personnels"]
+        */
     const data = await Personnel.findOne({ _id: req.params.id });
     res.status(200).send({
       error: false,
@@ -42,6 +51,9 @@ module.exports = {
   },
 
   update: async (req, res) => {
+    /*
+            #swagger.tags = ["Personnels"]
+        */
     if (!req.user.isAdmin) {
       req.body.isAdmin = false;
       delete req.body.isLead;
@@ -75,6 +87,10 @@ module.exports = {
   },
 
   delete: async (req, res) => {
+    /*
+            #swagger.tags = ["Personnels"]
+        */
+
     const data = await Personnel.deleteOne({ _id: req.params.id });
 
     res.status(data.deletedCount ? 204 : 404).send({

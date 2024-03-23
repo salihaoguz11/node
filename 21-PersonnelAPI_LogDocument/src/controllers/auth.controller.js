@@ -11,6 +11,19 @@ module.exports = {
   // LOGIN & LOGOUT
 
   login: async (req, res) => {
+    /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'Login'
+            #swagger.description = 'Login with username and password'
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: 'true',
+                schema: {
+                    username: "testF0",
+                    password: "1234"
+                }
+            }
+        */
     const { username, password } = req.body;
     if (username && password) {
       //? findOne, passwordu modeldeki set metodundaki encrypt i kullanarak db'de filtreleme yapar
@@ -61,6 +74,12 @@ module.exports = {
   },
 
   logout: async (req, res) => {
+    /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'Logout'
+            #swagger.description = 'Delete Token'
+        */
+
     /* SESSION */
     // Set session to null:
     req.session = null;

@@ -16,7 +16,8 @@ const auth = require("../controllers/auth.controller");
 
 // Login/logout:
 router.post("/login", auth.login);
-router.all("/logout", auth.logout);
+// router.all("/logout", auth.logout);// swagger all methodunu gormez.
+router.get("/logout", auth.logout); // swagger all methodunu gormez.
 
 /* ------------------------------------------------------- */
 module.exports = router;
