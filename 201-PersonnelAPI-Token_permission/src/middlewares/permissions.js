@@ -23,7 +23,7 @@ module.exports = {
       throw new Error("NoPermission: You must login and to be Admin.");
     }
   },
-  isAdminOrLead: (req, res, next) => {
+  isLead: (req, res, next) => {
     // lead sadece kendi departmeninin verilerine ulasabilir.
 
     const departmentId = req.params?.id;
@@ -36,22 +36,6 @@ module.exports = {
     } else {
       res.errorStatusCode = 403;
       throw new Error("NoPermission: You must login and to be Admin.");
-    }
-  },
-  isAdminOrOwn: (req, res, next) => {
-    const personnelId = req.params?.id;
-
-    if (
-      req.user &&
-      req.user.isActive &&
-      (req.user.isAdmin || req.user._id == personnelId)
-    ) {
-      next();
-    } else {
-      res.errorStatusCode = 403;
-      throw new Error(
-        "NoPermission: You must login and to be Admin or Record Owner."
-      );
     }
   },
 };
