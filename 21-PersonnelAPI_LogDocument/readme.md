@@ -104,3 +104,27 @@ app.use(require('./src/middlewares/logging')) // index.js
 ```jsx
 
 ```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
+
+```
