@@ -114,30 +114,54 @@ Bunun express js de kisa yolu vardir.
  $ npm i swagger-ui-express  - json'i gorsele cevirecek.
  $ npm i redoc-express
 
- Ana dizinde bu sekilde bir file olustur.
+ Ana dizinde bu sekilde bir file olustur. Icerisine verileri yaz.
  swaggerAutogen.js
 
  Daha sonra  yeni terminal ac ve "node swaggerAutogen.js"  yazarak terminalde calistir. Her sey yolundaysa
 kendisi swagger json dosyasi olusturur. Benim icin kolayca olusturdu.
 
-```
 
-###
-
-```jsx
 
 ```
 
 ###
 
 ```jsx
+ SWAGGER: index sayfasinda bu kod blogunu yazariz
+const swaggerUi = require('swagger-ui-express')
+const swaggerJson = require('./swagger.json')
+app.use('/documents/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, { swaggerOptions: { persistAuthorization: true } }))
+
+app.use('/documents/swagger', ) => bu URL de  swagger yayini yap
+setup("hangi json dosyasi","token calistirma ayari ") // iki parametre alir.
+
+Daha sonra Chrome gec ve arama motoruna asagida ki URL'i yaz
+ http://127.0.0.1:8000/documents/swagger
 
 ```
 
-###
+### JSON
 
 ```jsx
 
+app.use("/documents/json", (req, res) => {
+  res.sendFile("swagger.json", { root: "." }); //bir dosya icerigini ekrana basiyoruz.
+});
+ { root: "." } => dosyayi anadizinde ara.
+
+```
+
+### REDOC:
+
+```jsx
+const redoc = require("redoc-express");
+app.use(
+  "/documents/redoc",
+  redoc({
+    title: "PersonnelAPI",
+    specUrl: "/documents/json",
+  })
+);
 ```
 
 ###

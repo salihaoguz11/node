@@ -68,6 +68,7 @@ const document = {
       },
     },
     "/auth/refresh": {
+      // Bu model olmadigi icin manual yazdik. Diger 2 modeli require ettik.
       "token.refresh": {
         description: "{ token: { refresh: ... } }",
         type: "String",

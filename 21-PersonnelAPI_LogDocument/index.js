@@ -78,9 +78,29 @@ const morgan = require("morgan");
 // $ npm i redoc-express
 
 // //? JSON
-// app.use('/documents/json', (req, res) => {
-//   res.sendFile('swagger.json', { root: '.' })
-// })
+app.use("/documents/json", (req, res) => {
+  res.sendFile("swagger.json", { root: "." }); //bir dosya icerigini ekrana basiyoruz.
+});
+
+//? SWAGGER:
+const swaggerUi = require("swagger-ui-express");
+const swaggerJson = require("./swagger.json");
+app.use(
+  "/documents/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJson, {
+    swaggerOptions: { persistAuthorization: true },
+  })
+);
+// //? REDOC:
+const redoc = require("redoc-express");
+app.use(
+  "/documents/redoc",
+  redoc({
+    title: "PersonnelAPI",
+    specUrl: "/documents/json",
+  })
+);
 
 /* ------------------------------------------------------- */
 // Middlewares:
