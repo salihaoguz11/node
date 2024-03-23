@@ -4,7 +4,7 @@
 
 ```jsx
 Bir backend proje yazdigim zaman,bazi standartlarimin olmasi lazim.
-Bir dokumantation hazirlamak lazim. Piyasa da en cok kullanilanlar SWAGGER ve.
+Bir dokumantation hazirlamak lazim. Piyasa da en cok kullanilanlar SWAGGER ve REDOC.
 Bazi calisanlar remote calisiyor olabilir.Bu sekilde herkes dokumantasyonla
 rahat bir sekilde bilgilere ulasabilir.
 ```
@@ -97,11 +97,28 @@ Morgan islerini ayri  bir yere tasimak lazim. middlewares/logging.js seklinde in
 
 // Logging:
 app.use(require('./src/middlewares/logging')) // index.js
+
+log kayitlarini gitignore dosyasiyla github'a gitemsini engelleriz.
 ```
 
-###
+### SWAGGER AND REDOC
 
 ```jsx
+Ben  SWAGGER AND REDOC  dokumasyon hazirlarke JSON dokumantasyonu hazirlarim.
+"OpenAPI"  standarti ile yazarim. Normal sartlarda json dosyasini manual olarak yazmak lazim.
+Bazen model sayim artarsa dokumantasyonu json formatinda yazmam lazim.
+Bunun express js de kisa yolu vardir.
+
+ https://swagger-autogen.github.io/docs/
+ $ npm i swagger-autogen - Sistemi tarayip otomatik swagger json dosyasi ortaya cikarir.
+ $ npm i swagger-ui-express  - json'i gorsele cevirecek.
+ $ npm i redoc-express
+
+ Ana dizinde bu sekilde bir file olustur.
+ swaggerAutogen.js
+
+ Daha sonra  yeni terminal ac ve "node swaggerAutogen.js"  yazarak terminalde calistir. Her sey yolundaysa
+kendisi swagger json dosyasi olusturur. Benim icin kolayca olusturdu.
 
 ```
 

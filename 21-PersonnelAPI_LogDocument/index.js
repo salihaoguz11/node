@@ -71,7 +71,18 @@ const morgan = require("morgan");
 // );
 
 /* ------------------------------------------------------- */
+//* DOCUMENTATION:
+// https://swagger-autogen.github.io/docs/
+// $ npm i swagger-autogen
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
 
+// //? JSON
+// app.use('/documents/json', (req, res) => {
+//   res.sendFile('swagger.json', { root: '.' })
+// })
+
+/* ------------------------------------------------------- */
 // Middlewares:
 
 // Accept JSON:
