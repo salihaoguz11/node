@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | FullStack Team
 ------------------------------------------------------- */
 // Middleware: permissions (authorization)
 
@@ -39,6 +39,7 @@ module.exports = {
     }
   },
   isAdminOrOwn: (req, res, next) => {
+    //admin ve her personelin kendi bilgisi
     const personnelId = req.params?.id;
 
     if (

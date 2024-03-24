@@ -22,7 +22,7 @@ const token = require("../controllers/token.controller");
 
 const { isAdmin } = require("../middlewares/permissions");
 // router.use(permissions.isAdmin)
-router.use(isAdmin);
+router.use(isAdmin); //butun route larda isAdmin gecerli olacak.
 
 router.route("/").get(token.list).post(token.create);
 

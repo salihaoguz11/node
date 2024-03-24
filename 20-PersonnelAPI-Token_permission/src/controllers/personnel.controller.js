@@ -44,7 +44,7 @@ module.exports = {
   update: async (req, res) => {
     if (!req.user.isAdmin) {
       req.body.isAdmin = false;
-      delete req.body.isLead;
+      delete req.body.isLead; //gelen veriyi iptal eder.
       delete req.body.salary; // req.body den gelen salary verisini siler. Degisiklik yapilamaz.
     }
     // isLead Control:

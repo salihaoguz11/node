@@ -53,6 +53,16 @@ bilgisini yollar. Ona gore izin verip vermeme durumu olusacak.
 
 ```
 
+### TOKEN OLUSTURMA ASAMALARI
+
+```jsx
+1-Model olusturma             - Token Model
+2-Controller olusturma        - Token Controller
+3-Authentication middleware   -Kimlik bilgisi alma
+4-Authorization middleware    - Yetki kontrolu. Kimin neye yetkisi olacak.
+5-Routes                      - Kim hangi route'a, hangi bilgilere  erisim saglayacak.
+```
+
 ### Neden session degil Token tercih ederim?
 
 ```jsx

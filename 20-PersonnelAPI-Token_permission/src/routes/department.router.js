@@ -12,6 +12,8 @@ router
   .route("/")
   .get(permissions.isLogin, department.list)
   //login olduk mu?,middleware calisir ve eger login isek next der.
+  //middleware (permissions.isLogin,) ler hemen controller (department.list) onune yazilabilir.
+  //burada next olmazsa department.list'e gecemeyecek.
   .post(permissions.isAdmin, department.create);
 //admin kontrolu. Eger admin ise next
 
