@@ -20,6 +20,7 @@ module.exports = async (req, res, next) => {
     const tokenData = await Token.findOne({ token: tokenKey[1] }).populate(
       "userId"
     ); // personnel data ile birlestiriyoruz. Ve personnel verilerine ulasiyoruz.
+    //userid datasini personel referansindan al.
     // console.log(tokenData)
     if (tokenData) req.user = tokenData.userId; // Personnel Data
     // console.log(req.user) // req.user 'a  tokenData.userId ata ve req.user basinda

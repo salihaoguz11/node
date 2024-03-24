@@ -65,7 +65,7 @@ module.exports = {
     }
 
     const data = await Personnel.updateOne({ _id: req.params.id }, req.body, {
-      runValidators: true,
+      // runValidators: true,
     });
     res.status(202).send({
       error: false,

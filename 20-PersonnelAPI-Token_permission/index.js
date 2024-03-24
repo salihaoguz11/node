@@ -86,7 +86,7 @@ app.all("/", (req, res) => {
 // app.use('/departments', require('./src/routes/department.router'))
 // // /personnels
 // app.use('/personnels', require('./src/routes/personnel.router'))
-
+//? router lari index router da topladik ve burada sadece index router sayfasini cagirdik.
 // app.use(require('./src/routes/index'))
 app.use(require("./src/routes/"));
 

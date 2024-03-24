@@ -15,3 +15,5 @@ router.use("/personnels", require("./personnel.router"));
 router.use("/departments", require("./department.router"));
 
 module.exports = router;
+//ayri bir dosyaya tasinirsa muhakkak router kullaniriz.
+//router export edecegiz.

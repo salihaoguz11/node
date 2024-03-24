@@ -63,14 +63,34 @@ Cookie kontrolu tarayicida gerceklesir ama bir application cookie desteklmeyebil
 
 ```
 
-###
+### ADMIN BILGILERI
 
 ```jsx
+{
+ "departmentId":"65f8e31bcd98397415585032",
+ "username": "test17",
+ "password": "123456",
+ "firstName": "firstName",
+ "lastName": "lastName",
+ "phone": "123456789",
+ "email": "email12356@site.com",
+ "title": "title",
+ "salary": 2500,
+ "description": "description",
+ "isActive": true,
+ "isAdmin": true,
+ "isLead": true,
+ "startedAt": "2023-10-15 13:14:15"
+}
 
 ```
 
-###
+### NORMAL USER
 
 ```jsx
+{
+  "username": "testF0",
+  "password": "1234"
+}
 
 ```

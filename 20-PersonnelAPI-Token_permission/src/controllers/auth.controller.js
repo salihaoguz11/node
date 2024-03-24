@@ -15,7 +15,8 @@ module.exports = {
     if (username && password) {
       //? findOne, passwordu modeldeki set metodundaki encrypt i kullanarak db'de filtreleme yapar
 
-      const user = await Personnel.findOne({ username, password }); // burada sifreyi encript yapmaya gerek yok.Set metodu burada calisiyor.
+      const user = await Personnel.findOne({ username, password }); // burada sifreyi encript yapmaya gerek yok.
+      //Set metodu burada find metodunda yani filtreleme de calisiyor.
 
       if (user && user.isActive) {
         /* SESSION *
@@ -37,7 +38,7 @@ module.exports = {
         // Token var mı?
         let tokenData = await Token.findOne({ userId: user._id });
 
-        // Eğer token yoksa oluştur:
+        // Eğer token yoksa benzersiz bir token  oluştur:
         if (!tokenData) {
           const tokenKey = passwordEncrypt(user._id + Date.now());
           // console.log(typeof tokenKey, tokenKey)
@@ -63,7 +64,7 @@ module.exports = {
   logout: async (req, res) => {
     /* SESSION */
     // Set session to null:
-    req.session = null;
+    // req.session = null;
     /* SESSION */
 
     /* TOKEN */
@@ -72,7 +73,7 @@ module.exports = {
     // const deleted = await Token.deleteOne({ userId: req.user._id });
 
     //* 2. Yöntem:
-    //? Her kullanıcı için 1'den fazla token var ise (çoklu cihaz):
+    //? Her kullanıcı için 1'den fazla token var ise (çoklu cihaz.Bir cihazdan nyapilan cikis baska cihazi etkilemez.):
 
     const auth = req.headers?.authorization || null;
     const tokenKey = auth ? auth.split(" ") : null; // ['Token', '...tokenKey...']

@@ -27,7 +27,7 @@ const TokenSchema = new mongoose.Schema(
       required: true,
       index: true, //onemli olanlar veriler. Surekli kullanilan veriler
       // bellekte kolay ulasilabilecek bir yere yerlestirilir.
-      //Index true dersem eger bellkte kolay ulasilabilecek yere yerlestirilir
+      //Index true dersem eger bellekte kolay ulasilabilecek yere yerlestirilir
       //ve tokena ihtiyacim olunca hizlica ulasilabilir.
       unique: true,
     },
