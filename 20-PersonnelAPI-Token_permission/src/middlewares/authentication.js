@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
       "userId"
     ); // personnel data ile birlestiriyoruz. Ve personnel verilerine ulasiyoruz.
     //userid datasini personel referansindan al.
-    // console.log(tokenData)
+    console.log(tokenData);
     if (tokenData) req.user = tokenData.userId; // Personnel Data
     // console.log(req.user) // req.user 'a  tokenData.userId ata ve req.user basinda
     //req oldugu icin artik global oldu ve index.js dosyasinda da main path'ta onu kullandim.

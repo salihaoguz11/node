@@ -15,7 +15,7 @@ const token = require("../controllers/token.controller");
 //     .post(permissions.isAdmin, token.create)
 
 // router.route('/:id')
-//     .get(permissions.isAdmin, token.read)
+// .get(permissions.isAdmin, token.read)
 //     .put(permissions.isAdmin, token.update)
 //     .patch(permissions.isAdmin, token.update)
 //     .delete(permissions.isAdmin, token.delete)
