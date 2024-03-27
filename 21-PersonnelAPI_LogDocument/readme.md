@@ -12,7 +12,7 @@ rahat bir sekilde bilgilere ulasabilir.
 ### LOG KAYDI TUTMA
 
 ```jsx
-Ziaretci istatistiklerini tutma gibidir. Benim sistemime kim ne zaman girmis,neden baglandi
+Ziyaretci istatistiklerini tutma gibidir. Benim sistemime kim ne zaman girmis,neden baglandi
 sekilinde veri tutarim. Kurumsal bir site yonetiyorsaniz LOG kaydi tutmalidir.
 Denetlemesi yapilir bunlarin. Mesela bir satici trendyoldan satis yapiyor ve
 dolandiricilik yaptiginda, siber suclar subesi trendyoldan satici ile ilgili
@@ -90,7 +90,7 @@ app.use(morgan('combined', {
 }))
 
  Anayolda kendimiz logs klasoru olusturduk. Daha sonra asagida ki kodu yazinca
-./logs/${today}.log   logs klasotu icerisinde o gunun tarihinde bir file olusturur.
+./logs/${today}.log   logs kilasoru icerisinde o gunun tarihinde bir file olusturur.
 Bu sekilde log verilerini gun be gun tutariz.
 
 Morgan islerini ayri  bir yere tasimak lazim. middlewares/logging.js seklinde index tekileri bu doyaya tasiriz. Ve index'te bu middleware'i cagiririz.
