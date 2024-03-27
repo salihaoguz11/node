@@ -2,16 +2,16 @@
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-// Pizza Controller:
+// User Controller:
 
-const Pizza = require('../models/pizza')
+const User = require('../models/user')
 
 module.exports = {
 
     list: async (req, res) => {
         /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "List Pizzas"
+            #swagger.tags = ["Users"]
+            #swagger.summary = "List Users"
             #swagger.description = `
                 You can send query with endpoint for filter[], search[], sort[], page and limit.
                 <ul> Examples:
@@ -23,11 +23,11 @@ module.exports = {
             `
         */
 
-        const data = await res.getModelList(Pizza, {}, 'toppingIds')
+        const data = await res.getModelList(User)
 
         res.status(200).send({
             error: false,
-            details: await res.getModelListDetails(Pizza),
+            details: await res.getModelListDetails(User),
             data
         })
     },
@@ -36,11 +36,11 @@ module.exports = {
 
     create: async (req, res) => {
         /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "Create Pizza"
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Create User"
         */
 
-        const data = await Pizza.create(req.body)
+        const data = await User.create(req.body)
 
         res.status(201).send({
             error: false,
@@ -50,11 +50,11 @@ module.exports = {
 
     read: async (req, res) => {
         /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "Get Single Pizza"
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Get Single User"
         */
 
-        const data = await Pizza.findOne({ _id: req.params.id }).populate('toppingIds')
+        const data = await User.findOne({ _id: req.params.id })
 
         res.status(200).send({
             error: false,
@@ -64,26 +64,26 @@ module.exports = {
 
     update: async (req, res) => {
         /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "Update Pizza"
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Update User"
         */
 
-        const data = await Pizza.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
+        const data = await User.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
 
         res.status(202).send({
             error: false,
             data,
-            new: await Pizza.findOne({ _id: req.params.id })
+            new: await User.findOne({ _id: req.params.id })
         })
     },
 
     delete: async (req, res) => {
         /*
-            #swagger.tags = ["Pizzas"]
-            #swagger.summary = "Delete Pizza"
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Delete User"
         */
 
-        const data = await Pizza.deleteOne({ _id: req.params.id })
+        const data = await User.deleteOne({ _id: req.params.id })
 
         res.status(data.deletedCount ? 204 : 404).send({
             error: !data.deletedCount,
