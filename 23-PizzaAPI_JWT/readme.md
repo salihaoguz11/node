@@ -97,3 +97,138 @@ $
 npm i jsonwebtoken
 
 ```
+
+### JWT TOKEN OLUSTURMA - jwt.sign
+
+```jsx
+
+                    const accessInfo = {
+                             // kisa omurlu ama kritik datalar icerir.
+                        key: process.env.ACCESS_KEY,
+                        time: process.env?.ACCESS_EXP || '30m',
+                        data: {
+                            //user bilgileri comple saklanacak.
+                            _id: user._id,
+                            id: user.id,
+                            username: user.username,
+                            email: user.email,
+                            password: user.password,
+                            isActive: user.isActive,
+                            isAdmin: user.isAdmin,
+                        },
+                    }
+                    AccessToken access key ile sifreleyip ,30 dakika omur verip,
+                    onun icine de user datalrini comple gomuyorum.
+
+                    const refreshInfo = {
+                         //uzun omurlu ve kritik datalar icermez.
+
+                        key: process.env.REFRESH_KEY,
+                        time: process.env?.REFRESH_EXP || '30m',
+                           //kritik olmayan verileri gonderiyoruz.
+              id: user.id,
+                        data: {
+                            id: user.id,
+                            password: user.password // encrypted password
+                        },
+                    }
+                    RefreshToken refresh key ile sifreleyip ,3 gun  omur verip,
+                    onun icine de daha az kritik datalari gomuyorum.
+
+                    ** jwt.sign(access_data, access_key, { expiresIn: '30m' }) **
+
+                    const accessToken = jwt.sign(accessInfo.data, accessInfo.key, { expiresIn: accessInfo.time })
+
+                    jwt.sign => jwt kodu olusturma kodu
+                    accessInfo.data => bu datayi jetona donustur -imzala
+                    accessInfo.key, => jetona donusturken kullanilacak key
+                    expiresIn => omur bic
+
+
+                    const refreshToken = jwt.sign(refreshInfo.data, refreshInfo.key, { expiresIn: refreshInfo.time })
+
+                    /* JWT */
+
+                    res.status(200).send({
+                        error: false,
+                        token: tokenData.token, //simple token
+                        bearer: {
+                            access: accessToken,
+                            refresh: refreshToken,
+                        },
+                        user
+                    })
+
+
+
+
+```
+
+### token dogrulama - jwt.verify
+
+```jsx
+      Bu bolum authenticationa mw e  eklenir.
+    jwt.verify(
+        tokenKey[1],
+        process.env.ACCESS_KEY,
+        function (error, accessData) {
+            // burada JWT ile gonderdigim user datalar var
+          req.user = accessData ? accessData : false;
+          // req.user'a atama yapiyoruz.
+        }
+      );
+
+       tokenKey[1] verisini   process.env.ACCESS_KEY ile cozdukten sonra
+        function ya error yada  accessData doner.
+        Burada db e gidip sorgu yapilmadan verify yaptim.
+
+
+
+
+```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
+
+```
+
+### THUNDER DENEMELER - ADMIN
+
+```jsx
+{
+  "username": "suzan12345",
+  "email": "suzan123412@gmail.com",
+  "password": "aA?1234567",
+  "isActive": true,
+  "isAdmin": true
+}
+
+
+```
+
+### THUNDER DENEMELER - user
+
+```jsx
+        {
+  "username": "suzan1234",
+  "email": "suzan1234456@gmail.com",
+  "password": "aA?12344",
+  "isActive": true,
+  "isAdmin": false
+}
+
+
+```
