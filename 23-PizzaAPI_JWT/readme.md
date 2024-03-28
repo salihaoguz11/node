@@ -1,4 +1,4 @@
-### JWT - json web token
+# JWT - json web token
 
 ```jsx
 
@@ -9,6 +9,14 @@ Ne icin kullanilir?
 Authorization
 yada
 information exchanges-veri alisverisi
+
+```
+
+### INSTALATION
+
+```jsx
+$
+npm i jsonwebtoken
 
 ```
 
@@ -75,14 +83,17 @@ Eger secret key olmazsa bu micro serviste calismaz.
 
 ```
 
-###
+### JWT ZAYIF YONLER
 
 ```jsx
+1-Decode edilebiliyor olmasi.
 
 ```
 
 ###
 
 ```jsx
+$
+npm i jsonwebtoken
 
 ```
