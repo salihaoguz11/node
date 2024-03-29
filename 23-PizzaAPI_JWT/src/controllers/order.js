@@ -1,15 +1,15 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // Order Controller:
 
-const Order = require('../models/order')
+const Order = require("../models/order");
+const Pizza = require("../models/pizza");
 
 module.exports = {
-
-    list: async (req, res) => {
-        /*
+  list: async (req, res) => {
+    /*
             #swagger.tags = ["Orders"]
             #swagger.summary = "List Orders"
             #swagger.description = `
@@ -22,72 +22,100 @@ module.exports = {
                 </ul>
             `
         */
+    // Manage only self-record.
+    let customFilter = {};
+    if (!req.user.isAdmin) {
+      customFilter = { userId: req.user.id };
+    }
 
-        const data = await res.getModelList(Order, {}, ['userId', 'pizzaId'])
+    // const data = await res.getModelList(Order, customFilter, ['userId', 'pizzaId'])
+    const data = await res.getModelList(Order, customFilter, [
+      "userId",
+      {
+        path: "pizzaId",
+        select: "-__v",
+        populate: { path: "toppingIds", select: "name" },
+      },
+    ]);
+    //? nested populate
+    res.status(200).send({
+      error: false,
+      details: await res.getModelListDetails(Order),
+      data,
+    });
+  },
 
-        res.status(200).send({
-            error: false,
-            details: await res.getModelListDetails(Order),
-            data
-        })
-    },
+  // CRUD:
 
-    // CRUD:
-
-    create: async (req, res) => {
-        /*
+  create: async (req, res) => {
+    /*
             #swagger.tags = ["Orders"]
             #swagger.summary = "Create Order"
         */
 
-        const data = await Order.create(req.body)
+    // get price from the pizza:
+    if (!req.body?.price) {
+      const pizzaData = await Pizza.findOne({ _id: req.body.pizzaId });
+      req.body.price = pizzaData.price; // eger pizza price gelmezse  modelde kayitli olan price getir.
+    }
+    const data = await Order.create(req.body);
 
-        res.status(201).send({
-            error: false,
-            data
-        })
-    },
+    res.status(201).send({
+      error: false,
+      data,
+    });
+  },
 
-    read: async (req, res) => {
-        /*
+  read: async (req, res) => {
+    /*
             #swagger.tags = ["Orders"]
             #swagger.summary = "Get Single Order"
         */
+    // Manage only self-record.
+    let customFilter = {};
+    if (!req.user.isAdmin) {
+      customFilter = { userId: req.user.id };
+    }
 
-        const data = await Order.findOne({ _id: req.params.id }).populate(['userId', 'pizzaId'])
+    const data = await Order.findOne({
+      _id: req.params.id,
+      ...customFilter,
+    }).populate(["userId", "pizzaId"]);
 
-        res.status(200).send({
-            error: false,
-            data
-        })
-    },
+    res.status(200).send({
+      error: false,
+      data,
+    });
+  },
 
-    update: async (req, res) => {
-        /*
+  update: async (req, res) => {
+    /*
             #swagger.tags = ["Orders"]
             #swagger.summary = "Update Order"
         */
 
-        const data = await Order.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
+    const data = await Order.updateOne({ _id: req.params.id }, req.body, {
+      runValidators: true,
+    });
 
-        res.status(202).send({
-            error: false,
-            data,
-            new: await Order.findOne({ _id: req.params.id })
-        })
-    },
+    res.status(202).send({
+      error: false,
+      data,
+      new: await Order.findOne({ _id: req.params.id }),
+    });
+  },
 
-    delete: async (req, res) => {
-        /*
+  delete: async (req, res) => {
+    /*
             #swagger.tags = ["Orders"]
             #swagger.summary = "Delete Order"
         */
 
-        const data = await Order.deleteOne({ _id: req.params.id })
+    const data = await Order.deleteOne({ _id: req.params.id });
 
-        res.status(data.deletedCount ? 204 : 404).send({
-            error: !data.deletedCount,
-            data
-        })
-    }
-}
+    res.status(data.deletedCount ? 204 : 404).send({
+      error: !data.deletedCount,
+      data,
+    });
+  },
+};

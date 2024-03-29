@@ -197,9 +197,15 @@ npm i jsonwebtoken
 
 ```
 
-###
+### nested populate
 
 ```jsx
+['userId', { path: 'pizzaId', select: '-__v', populate: { path: 'toppingIds', select: 'name' } }]
+nested populate
+bu sekilde pizzaId icerisinde ki  toppings detaillerine ulasabilirim.
+select: 'name' sadece name goster diyoruz.
+select: '-id' gormek istemedigim seyin basina - yazabilirim. Zaten sadece id default olarak gelir.
+select: '-__v', bu haric digerleri gozukur.
 
 ```
 
