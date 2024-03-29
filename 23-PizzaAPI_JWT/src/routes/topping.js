@@ -1,24 +1,26 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-const router = require('express').Router()
+const router = require("express").Router();
 /* ------------------------------------------------------- */
 // routes/topping:
 
-const topping = require('../controllers/topping')
+const topping = require("../controllers/topping");
+const { isAdmin } = require("../middlewares/permissions");
 
-// URL: /toppings
+// URL: /toppings - sadece admin islem yapar bu route ta.
 
-router.route('/')
-    .get(topping.list)
-    .post(topping.create)
+router.use(isAdmin);
 
-router.route('/:id')
-    .get(topping.read)
-    .put(topping.update)
-    .patch(topping.update)
-    .delete(topping.delete)
+router.route("/").get(topping.list).post(topping.create);
+
+router
+  .route("/:id")
+  .get(topping.read)
+  .put(topping.update)
+  .patch(topping.update)
+  .delete(topping.delete);
 
 /* ------------------------------------------------------- */
-module.exports = router
+module.exports = router;

@@ -167,7 +167,11 @@ npm i jsonwebtoken
 ### token dogrulama - jwt.verify
 
 ```jsx
-      Bu bolum authenticationa mw e  eklenir.
+      Bu bolum authenticationa mw e  eklenir. Verify iki parametre alirsa senkron olur
+      ama 3 parametre alirsa asenkron olur.
+
+      Ayni isimde bir metodu farkli parametrelerle kullanmak OVERLOADING denir.
+
     jwt.verify(
         tokenKey[1],
         process.env.ACCESS_KEY,
@@ -229,6 +233,24 @@ npm i jsonwebtoken
   "isActive": true,
   "isAdmin": false
 }
+
+
+
+
+```
+
+### refresh yapmak ve yeni access token icin Thunder
+
+```jsx
+
+auth route ta refresh route olusturuyoruz.
+http://127.0.0.1:8000/auth/refresh
+
+body kismina  bu kod blogunu yapistirip yeniden access token isteriz.
+ "bearer": {
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDVmNTY3NjY5NjY3YTE1N2U5NGE5MSIsInBhc3N3b3JkIjoiZWE3NjMzNGI2YmYwZDY5NzdlOWM3OTI2MmU1MGUyOWJlM2ZiMTFhM2VmYTRkNzMwMGY1MTU5Yzg0NjA5NWNhYiIsImlhdCI6MTcxMTY2NjY1NywiZXhwIjoxNzExOTI1ODU3fQ.yCX8FF_HAjRdHD0eeSmWQSYCAjOooCYRogfudNKXPuk"
+  }
+
 
 
 ```
