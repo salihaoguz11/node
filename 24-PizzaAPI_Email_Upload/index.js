@@ -151,6 +151,8 @@ app.all("/", (req, res) => {
   });
 });
 
+// Static Files:
+app.use("/uploads", express.static("./uploads"));
 /* ------------------------------------------------------- */
 
 // errorHandler:

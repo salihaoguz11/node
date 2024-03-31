@@ -16,7 +16,7 @@
 ###
 
 ```jsx
-Nodemailer node js'in popular mail gonderme modullerinden biridir.
+Nodemailer node js in popular mail gonderme modullerinden biridir.
 Ethernal mail ise nodemailin fake mail gonderme servisidir.
 
 ```
@@ -24,9 +24,9 @@ Ethernal mail ise nodemailin fake mail gonderme servisidir.
 ### NEDEN FAKE MAIL SERVISI KULLANIRIZ?
 
 ```jsx
-Ben mail ayarlarini yaparken bazi ayaralr yapmam lazim.
+Ben mail ayarlarini yaparken bazi ayarlar yapmam lazim.
 Fake oldugu icin mail gonderme islemi yapilmiyor.
-Fakle mailin bize verdigi bilgilerle biz email servisimizin on ayarlarini yapariz.
+Fake mailin bize verdigi bilgilerle biz email servisimizin on ayarlarini yapariz.
 Sonra email servisimizin calsitigina emin olunca onu bir fonksiyona ceviririz.
 
 ```
@@ -55,7 +55,10 @@ createTestAccount satirini yoruma aliyoruz.
 
 
 
-// Connect to MailServer:
+
+
+
+
 
 ```
 
@@ -65,6 +68,17 @@ createTestAccount satirini yoruma aliyoruz.
 Mail serverlar cift hizmete sahiptir. Mail gondermek ve almak
 Bir mail serverda iki tane server kurulmus oluyor.
 Biri mail alan hizmet digeri de mail gonderen hizmet.
+
+/* gelen data
+{
+  user: 'yb3iukq2u3sfgsgk@ethereal.email',
+  pass: 'cYW1UAnBGdkUwCEYzA',
+  smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
+  imap: { host: 'imap.ethereal.email', port: 993, secure: true },
+  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
+  web: 'https://ethereal.email'
+}
+*/
 
   smtp: Mail gonderen protocol
   imap: Mail alan protocol
@@ -116,6 +130,7 @@ transporter.sendMail(
     success ? console.log("SUCCESS", success) : console.log("ERROR", error);
   }
 );
+
 response: 250 Accepted geldiyse islem basarili demektir.
 Asenkrone bir fonksiyon ve callback fonsiyou aliyor.
 Bu sekilde email gonderme islemini yapiyoruz.
@@ -375,23 +390,6 @@ Orada middleware  olarak cagiririm.
   // form secip guncelleme yaparsin. Mesela pizza adi guncelleme gibi.å
   .patch(isAdmin, upload.array("images"), pizza.update)
   .delete(isAdmin, pizza.delete);
-```
-
-### BIR MIDDLEWARE NASIL IPTAL EDILIR
-
-```jsx
-
-module.exports = {
-  isLogin: (req, res, next) => {
-    return next(); //BURAYA return NEXT KOYARSIN
-    if (req.user && req.user.isActive) {
-      next();
-    } else {
-      res.errorStatusCode = 403;
-      throw new Error("NoPermission: You must login.");
-    }
-  }
-  },
 
 ```
 
@@ -411,6 +409,18 @@ buraya yazdigin isim ayni olmali.
 ###
 
 ```jsx
+Frontendin bu ekledigimiz dosyalari ekrana basabilmesi icin static oldugunu
+belirtmmeiz gerekir.
+static oldugunu belirtince express/ node js e bu dosyanin ekrana
+basilmasini istedigimiz belirtiyoruz
+index sayfasina asagidaki kodlari ekleriz.
+
+// Static Files:
+app.use('/uploads', express.static('./uploads'))
+'/uploads' ile baslayan url ler static dosyalardir diye belirtiyoruz.
+
+app.use => '/uploads' sonunda ne gelirse gelsin onemli degil,kabul et.
+app.all => '/uploads'  sonunda gelen path ler onemli diyorum.
 
 ```
 
@@ -424,4 +434,21 @@ buraya yazdigin isim ayni olmali.
 
 ```jsx
 
+```
+
+### BIR MIDDLEWARE NASIL IPTAL EDILIR
+
+```jsx
+
+module.exports = {
+  isLogin: (req, res, next) => {
+    return next(); //BURAYA return NEXT KOYARSIN
+    if (req.user && req.user.isActive) {
+      next();
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error("NoPermission: You must login.");
+    }
+  }
+  },
 ```
