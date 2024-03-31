@@ -36,6 +36,9 @@ dbConnection();
 // Accept JSON:
 app.use(express.json());
 
+// Accept Form-Data:
+app.use(express.urlencoded({ extended: true }));
+
 // Logger:
 app.use(require("./src/middlewares/logger"));
 
@@ -44,6 +47,89 @@ app.use(require("./src/middlewares/authentication"));
 
 // findSearchSortPage / res.getModelList:
 app.use(require("./src/middlewares/queryHandler"));
+
+/* ------------------------------------------------------- */
+//* EMAIL:
+// nodemailer
+// https://www.nodemailer.com/
+// https://www.npmjs.com/package/nodemailer
+// https://ethereal.email/
+
+// const nodemailer = require("nodemailer");
+
+// Create Test (Fake) Account:
+//Bana fake bir mail olustur ve bana bu mailin verilerini ver
+// nodemailer.createTestAccount().then((data) => console.log(data));
+
+/* gelen data 
+{
+  user: 'yb3iukq2u3sfgsgk@ethereal.email',
+  pass: 'cYW1UAnBGdkUwCEYzA',
+  smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
+  imap: { host: 'imap.ethereal.email', port: 993, secure: true },
+  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
+  web: 'https://ethereal.email'
+}
+
+*/
+
+// Connect to MailServer:
+// const transporter = nodemailer.createTransport({
+//   // SMTP:
+//   host: "smtp.ethereal.email",
+//   port: 587,
+//   secure: false, // ssl, tls
+//   auth: {
+//     user: "yb3iukq2u3sfgsgk@ethereal.email",
+//     pass: "cYW1UAnBGdkUwCEYzA",
+//   },
+// });
+// console.log(transporter);
+
+// SendMail:
+// transporter.sendMail(
+//   {
+//     from: "yb3iukq2u3sfgsgk@ethereal.email", // from yazilmak zorunda degil.buraya baska mail adresi yazilirsa spama duser.
+//     to: "developersaliha@gmail.com", // 'a@b.com, c@d.com'
+//     subject: "Hello",
+//     text: "Hello There. How are you?",
+//     html: "<b>Hello There.</b> <p>How are you?</p>",
+//   },
+//   (error, success) => {
+//     success ? console.log("SUCCESS", success) : console.log("ERROR", error);
+//   }
+// );
+
+// // //* GoogleMail (gmail)
+// // //* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
+
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: "developersaliha@gmail.com",
+//     pass: "aiii wghm rcyy noxl",
+//   },
+// });
+
+// //? YandexMail (yandex):
+// const transporter = nodemailer.createTransport({
+//     service: 'Yandex',
+//     auth: {
+//         user: 'username@yandex.com',
+//         pass: 'password' // your emailPassword
+//     }
+// })
+
+// transporter.sendMail(
+//   {
+//     // from: 'developersaliha@gmail.com'
+//     to: "developersaliha@gmail.com",
+//     subject: "Hello",
+//     text: "Hello There. How are you?",
+//     html: "<b>Hello There.</b> <p>How are you?</p>",
+//   },
+//   (error, success) => console.log(success, error)
+// );
 
 /* ------------------------------------------------------- */
 // Routes:

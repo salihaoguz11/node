@@ -5,6 +5,7 @@
 // User Controller:
 
 const User = require("../models/user");
+const sendMail = require("../helpers/sendMail");
 
 module.exports = {
   list: async (req, res) => {
@@ -40,6 +41,17 @@ module.exports = {
         */
 
     const data = await User.create(req.body);
+
+    /* SendMail */
+    sendMail(
+      data.email, //to
+      "Welcome", // subject
+      // Message
+      `
+                <h1>Welcome ${data.username}</h1>
+                <p>Welcome to our system</p>
+            `
+    );
 
     res.status(201).send({
       error: false,

@@ -6,6 +6,7 @@
 
 const Order = require("../models/order");
 const Pizza = require("../models/pizza");
+const sendMail = require("../helpers/sendMail");
 
 module.exports = {
   list: async (req, res) => {
@@ -59,6 +60,15 @@ module.exports = {
       req.body.price = pizzaData.price; // eger pizza price gelmezse  modelde kayitli olan price getir.
     }
     const data = await Order.create(req.body);
+    /* SendMail */
+    sendMail(
+      data.email, // to
+      "Siparişiniz alındı.", // subject
+      // Message
+      `
+              <p>Siparişiniz alındı.</p>
+          `
+    );
 
     res.status(201).send({
       error: false,
