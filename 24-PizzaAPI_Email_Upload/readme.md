@@ -291,7 +291,7 @@ app.use(express.urlencoded({ extended: true }))
 
 ```
 
-###
+### MULTER
 
 ```jsx
  Bir dosya yollamak istersem Form u secmem lazim.
@@ -303,12 +303,121 @@ app.use(express.urlencoded({ extended: true }))
  Resim BINARY bir veridir.
 
 
+
+
+
 ```
 
 ### DOSYA YUKLEME - MULTER
 
 ```jsx
-const multer = require("multer");
+
+* UPLOAD
+? $ npm i multer
+https://expressjs.com/en/resources/middleware/multer.html
+multer module ile "form-data" verileri kabul edebiliriz. Yani dosya yükleme yapılabilir.
+
+const multer = require('multer')
+const upload = multer({
+    // dest: './uploads',
+    storage: multer.diskStorage({
+      //storage ile daha fazla ayar yapabiliir.
+        destination: './uploads',
+        // ana dosyada upload isminde bir dosya olustur ve gelen dosyalari buraya koy diyoruz.
+        //upload dosyasi otomatik kendi olusur.
+
+  // filename fonksiyonunu yazmazsak sistem dosyaya kafasina gore isim verir.
+        filename: function(req, file, returnCallback) {
+            returnCallback(error, filename)
+            returnCallback(null, 'saliha.jpg') // error null, dosya ismim saliha olsun
+            console.log(file)
+            returnCallback(null, file.originalname)
+            // file ile gelen original name i  kullan
+            //mesela user avatar resmi gonderip ismini kendi verebilir.
+            returnCallback(null, Date.now() + '-' + file.originalname)
+            //dosya isimleri ayni olursa uzerine yazar. Ama bu sekilde
+            // yazarsak zamani da ekler ve dosya uzerien yazma olayi olmaz.
+        }
+    })
+})
+
+const upload = require('../middlewares/upload')
+
+
+req  => request
+file => dosya ile ilgili bilgi
+returnCallback => filename fonksiyonunu calistirir.
+
+const upload = require('../middlewares/upload')
+
+```
+
+###
+
+```jsx
+MULTER bir middlewaredir ama genel bir middleware degildir. Dosya yukleme isini nerede yapacaksak
+orada cagiririz.Permissionlar gibidir. Index te cagirmayiz, nerede kullanacaksak orada cagiririz.
+Mesela pizza create islemi yaparken bir dosya yuklemek istiyorum.
+Orada middleware  olarak cagiririm.
+3 tane methodu vardir.
+
+1- Single => sadece bir dosya yuklemeye izin verir.
+2- Array  => birden fazla dosya yuklemeye izin verir. en islevsel methoddur.
+3- Any    => inputun ismi ne olursa olsun, kac dosya olursa olsun. Guvenli degil.
+
+* Input name ile upload ( inputname ) ayni olmalidir.
+
+    router
+  .route("/:id")
+  .get(pizza.read)
+  .put(isAdmin, upload.array("images"), pizza.update)
+  .put(isAdmin, upload.array("fileInputName"), pizza.update)
+  // form secip guncelleme yaparsin. Mesela pizza adi guncelleme gibi.å
+  .patch(isAdmin, upload.array("images"), pizza.update)
+  .delete(isAdmin, pizza.delete);
+```
+
+### BIR MIDDLEWARE NASIL IPTAL EDILIR
+
+```jsx
+
+module.exports = {
+  isLogin: (req, res, next) => {
+    return next(); //BURAYA return NEXT KOYARSIN
+    if (req.user && req.user.isActive) {
+      next();
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error("NoPermission: You must login.");
+    }
+  }
+  },
+
+```
+
+### FILE YUKLEME
+
+```jsx
+
+THUNDER => form files tikla
+POSTMAN => form-data key yaninda oku tila files sec.
+
+Thunder da Form sec sonra files tikla ve filed namei yaz.
+Burada yazdigin ile (images)
+.put(isAdmin, upload.array("images"), pizza.update)
+buraya yazdigin isim ayni olmali.
+```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
+
 ```
 
 ###
