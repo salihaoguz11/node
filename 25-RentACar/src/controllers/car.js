@@ -43,8 +43,8 @@ module.exports = {
         */
 
     // createdId ve updatedId verisini req.user'dan al:
-    req.body.createdId = req.user._id;
-    req.body.updatedId = req.user._id;
+    // req.body.createdId = req.user._id;
+    // req.body.updatedId = req.user._id;
 
     const data = await Car.create(req.body);
 
