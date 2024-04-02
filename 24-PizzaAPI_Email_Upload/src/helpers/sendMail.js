@@ -19,7 +19,6 @@ module.exports = function (to, subject, message) {
   //   },
   // });
   // console.log(transporter);
-
   // SendMail:
   // transporter.sendMail(
   //   {
@@ -33,18 +32,15 @@ module.exports = function (to, subject, message) {
   //     success ? console.log("SUCCESS", success) : console.log("ERROR", error);
   //   }
   // );
-
   // //* GoogleMail (gmail)
   // //* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
-
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "developersaliha@gmail.com",
-      pass: "aiii wghm rcyy noxl",
-    },
-  });
-
+  // const transporter = nodemailer.createTransport({
+  //   service: "gmail",
+  //   auth: {
+  //     user: "developersaliha@gmail.com",
+  //     pass: "dcua wfut ftdg teoq",
+  //   },
+  // });
   // //? YandexMail (yandex):
   // const transporter = nodemailer.createTransport({
   //     service: 'Yandex',
@@ -53,15 +49,14 @@ module.exports = function (to, subject, message) {
   //         pass: 'password' // your emailPassword
   //     }
   // })
-
-  transporter.sendMail(
-    {
-      // from: 'developersaliha@gmail.com'
-      to: to, //"developersaliha@gmail.com",
-      subject: subject, // "Hello",
-      text: message, // "Hello There. How are you?"
-      html: message, //"<b>Hello There.</b> <p>How are you?</p>",
-    },
-    (error, success) => console.log(success, error)
-  );
+  // transporter.sendMail(
+  //   {
+  //     // from: 'developersaliha@gmail.com'
+  //     to: to, //"developersaliha@gmail.com",
+  //     subject: subject, // "Hello",
+  //     text: message, // "Hello There. How are you?"
+  //     html: message, //"<b>Hello There.</b> <p>How are you?</p>",
+  //   },
+  //   (error, success) => console.log(success, error)
+  // );
 };

@@ -3,7 +3,6 @@
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // Pizza Controller:
-
 const Pizza = require("../models/pizza");
 
 module.exports = {
@@ -92,7 +91,9 @@ module.exports = {
     //diger datalara ihtiyacim yok. id gelmesin istiyorum. { _id: 0, images: 1 }
 
     // pizza.images
-
+    // if (pizza.images.length > 5) {
+    //   res.status(400).send(" you have enough images");
+    // } else {
     for (let file of req.files) {
       // Mevcut pizza resimlerine ekle:
       // pizza.images.push(file.filename)
@@ -100,6 +101,8 @@ module.exports = {
     }
     // Pizza resimlerini req.body'ye aktar:
     req.body.images = pizza.images;
+    // console.log(req.body.images.length);
+    // }
 
     const data = await Pizza.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,

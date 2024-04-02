@@ -8,6 +8,8 @@
     $ npm i express dotenv mongoose express-async-errors
     $ npm i morgan swagger-autogen swagger-ui-express redoc-express
     $ mkdir logs
+    $ npm i jsonwebtoken
+    $ npm i nodemailer multer
     $ nodemon
 */
 const express = require("express");
@@ -55,7 +57,7 @@ app.use(require("./src/middlewares/queryHandler"));
 // https://www.npmjs.com/package/nodemailer
 // https://ethereal.email/
 
-// const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 
 // Create Test (Fake) Account:
 //Bana fake bir mail olustur ve bana bu mailin verilerini ver
@@ -75,7 +77,7 @@ app.use(require("./src/middlewares/queryHandler"));
 
 // Connect to MailServer:
 // const transporter = nodemailer.createTransport({
-//   // SMTP:
+//   SMTP:
 //   host: "smtp.ethereal.email",
 //   port: 587,
 //   secure: false, // ssl, tls
@@ -107,7 +109,7 @@ app.use(require("./src/middlewares/queryHandler"));
 //   service: "gmail",
 //   auth: {
 //     user: "developersaliha@gmail.com",
-//     pass: "aiii wghm rcyy noxl",
+//     pass: "dcua wfut ftdg teoq",
 //   },
 // });
 

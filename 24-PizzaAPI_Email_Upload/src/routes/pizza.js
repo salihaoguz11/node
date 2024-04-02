@@ -15,6 +15,7 @@ const { isAdmin } = require("../middlewares/permissions");
 // multer module ile "form-data" verileri kabul edebiliriz. Yani dosya yükleme yapılabilir.
 
 // const multer = require("multer");
+
 // const upload = multer({
 //   // dest: './uploads', dosyalari upload isminde bir dosyaya yukle
 //   storage: multer.diskStorage({
@@ -49,7 +50,7 @@ router
 router
   .route("/:id")
   .get(pizza.read)
-  .put(isAdmin, upload.array("images"), pizza.update)
+  .put(isAdmin, upload.array("images", 4), pizza.update)
   // .put(isAdmin, upload.array("fileInputName"), pizza.update)
   .patch(isAdmin, upload.array("images"), pizza.update)
   .delete(isAdmin, pizza.delete);

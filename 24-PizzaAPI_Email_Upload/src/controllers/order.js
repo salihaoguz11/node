@@ -6,6 +6,7 @@
 
 const Order = require("../models/order");
 const Pizza = require("../models/pizza");
+const User = require("../models/user");
 const sendMail = require("../helpers/sendMail");
 
 module.exports = {
@@ -59,10 +60,15 @@ module.exports = {
       const pizzaData = await Pizza.findOne({ _id: req.body.pizzaId });
       req.body.price = pizzaData.price; // eger pizza price gelmezse  modelde kayitli olan price getir.
     }
+
+    // const data = await (await Order.create(req.body)).populate("userId");
     const data = await Order.create(req.body);
+    const user = await User.findOne({ _id: data.userId });
+
     /* SendMail */
     sendMail(
-      data.email, // to
+      // data.userId.email
+      user.email, // to
       "Siparişiniz alındı.", // subject
       // Message
       `
