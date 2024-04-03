@@ -66,11 +66,14 @@ module.exports = {
         */
 
     //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
+    //? Method 1
     // if (!req.user.isAdmin) {
     //     req.params.id = req.user.id
     // }
     // const data = await User.findOne({ _id: req.params.id })
-    // Başka bir kullanıcıyı görmesini engelle:
+
+    //? Başka bir kullanıcıyı görmesini engelle:
+    //? Method 2
     //   let customFilter = { _id: req.params.id }
     //   if (!req.user.isAdmin && !req.user.isStaff) {
     //       customFilter = { _id: req.user._id }
@@ -79,6 +82,7 @@ module.exports = {
     //   const data = await User.findOne(customFilter)
 
     //? Yetkisiz kullanıcının başka bir kullanıcıyı yönetmesini engelle (sadece kendi verileri):
+    //? Method 3
     const id = req.user.isAdmin ? req.params.id : req.user.id;
 
     const data = await User.findOne({ _id: id });

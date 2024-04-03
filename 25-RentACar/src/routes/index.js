@@ -18,7 +18,7 @@ router.use("/tokens", require("./token"));
 // car:
 router.use("/cars", require("./car"));
 // reservation:
-// router.use("/reservations", require("./reservation"));
+router.use("/reservations", require("./reservation"));
 
 // document:
 router.use("/documents", require("./document"));
