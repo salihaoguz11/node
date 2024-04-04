@@ -21,11 +21,21 @@ module.exports = {
                 </ul>
             `
         */
-    const data = await res.getModelList(Reservation);
+
+    let customFilter = {};
+    if (!req.user.isAdmin && !req.user.isStaff) {
+      customFilter = { userId: req.user._id };
+    }
+    const data = await res.getModelList(Reservation, customFilter, [
+      { path: "userId", select: "username firstName lastName" },
+      // { path: "carId" },
+      { path: "createdId", select: "username" },
+      { path: "updatedId", select: "username" },
+    ]);
 
     res.status(200).send({
       error: false,
-      details: await res.getModelListDetails(Reservation),
+      details: await res.getModelListDetails(Reservation, customFilter),
       data,
     });
   },
@@ -54,18 +64,52 @@ module.exports = {
     req.body.updatedId = req.user._id;
     // console.log(req.user);
 
-    const data = await Reservation.create(req.body);
-
-    res.status(201).send({
-      error: false,
-      data,
+    // Kullanıcının çakışan tarihlerde başka bir reservesi var mı?
+    const userReservationInDates = await Reservation.findOne({
+      userId: req.body.userId,
+      // carId: req.body.carId, // Farklı bir araba kiralanabilir
+      $nor: [
+        { startDate: { $gt: req.body.endDate } }, // gt: >
+        { endDate: { $lt: req.body.startDate } }, // lt: <
+      ],
     });
+    // console.log(userReservationInDates);
+    if (userReservationInDates) {
+      throw new Error(
+        "It cannot be added because there is another reservation with the same date.",
+        { cause: { userReservationInDates: userReservationInDates } }
+      );
+    } else {
+      const data = await Reservation.create(req.body);
+
+      res.status(201).send({
+        error: false,
+        data,
+      });
+    }
   },
   read: async (req, res) => {
     /*
                     #swagger.tags = ["Reservations"]
                     #swagger.summary = "Get Single Reservation"
                 */
+
+    // Başka bir kullanıcı datasını görmesini engelle:
+
+    let customFilter = {};
+    if (!req.user.isAdmin && !req.user.isStaff) {
+      customFilter = { userId: req.user._id };
+    }
+
+    const data = await Reservation.findOne({
+      _id: req.params.id,
+      ...customFilter,
+    }).populate([
+      { path: "userId", select: "username firstName lastName" },
+      { path: "carId" },
+      { path: "createdId", select: "username" },
+      { path: "updatedId", select: "username" },
+    ]);
 
     res.status(200).send({
       error: false,
@@ -92,6 +136,9 @@ module.exports = {
 
     // updatedId verisini req.user'dan al:
     req.body.updatedId = req.user._id;
+    const data = await Reservation.updateOne({ _id: req.params.id }, req.body, {
+      runValidators: true,
+    });
 
     res.status(202).send({
       error: false,
