@@ -52,8 +52,8 @@ Ben FE ye verirken iki veri veririm
 1-Access Token
 2-Refresh Token
 
-FE bana header authorization da bearer yazarak access token'i yollayacak.
-Bunun icinde usser bilgiis oldugu icin veri tabaniona gidip sorgu gerekmez.
+FE bana header authorization da bearer yazarak access tokeni yollayacak.
+Bunun icinde usser bilgisi oldugu icin veri tabanina gidip sorgu gerekmez.
 Ama bu access token 30 dk lik mesela. 30 dk sonra cop olacak.
 Bu sebepten FE tekrar bir sorgu gonderecek ve refresh kodu gonderecek.
 Tekrar access kod isteyecek. BE database de gelen veriyi check edecek.
