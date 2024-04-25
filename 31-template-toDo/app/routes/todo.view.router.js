@@ -8,24 +8,22 @@ const todo = require("../controllers/todo.view.controller");
 
 const router = require("express").Router();
 
-// // List:
-// router.get('/', todo.list)
-// // Create:
-// router.post('/', todo.create)
-// // Read:
-// router.get('/:id', todo.read)
-// // Update:
-// router.put('/:id', todo.update)
-// // Delete:
-// router.delete('/:id', todo.delete)
+// router.route('/')
+//     .get(todo.list)
+//     .post(todo.create)
 
-router.route("/").get(todo.list).post(todo.create);
+// router.route('/:id')
+//     .get(todo.read)
+//     .put(todo.update)
+//     .patch(todo.update)
+//     .delete(todo.delete)
 
-router
-  .route("/:id")
-  .get(todo.read)
-  .put(todo.update)
-  .patch(todo.update)
-  .delete(todo.delete);
+router.get("/", todo.list);
+
+// router.get('/create', todo.create) // form view
+// router.post('/create', todo.create) // form send
+router.all("/create", todo.create);
+//formu gormek icin once get yapiyorum.
+//Burada hem get hemde post yaptigim icin all kullanirim.
 
 module.exports = router;

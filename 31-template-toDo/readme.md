@@ -93,6 +93,9 @@ app.all("/", (req, res) => {
 
 
 
+
+
+
 ```
 
 ### EJS TAG - <% %>
@@ -154,6 +157,30 @@ Bu kodlari app js route kismina yapistiriyoruz.
 hem HTML cikti verecegiz hemde API de hizmeti verecegiz.
 app.use('/api', require('./app/routes/todo.router'))
 app.use('/view', require('./app/routes/todo.view.router'))
+
+```
+
+###
+
+```jsx
+Tarayicilarda default method GET tir. Sadece Form gonderdigimde POST
+method kullanilabili. Tarayicilarda PUT,DELETE gibi methodlar yoktur. Bu
+sebeple URL yapisini buna gore kurmamiz gerekir.
+Yani router i ona gore guncellemeliyiz.
+
+Eger hem get hem de post islemin yapacaksam all kullanirim
+ router.all("/create", todo.create);
+
+
+ Formdan gelen datayi  kabul etmesi ve objeye cevirmesi  icin "app.js" ye  bu kodu ekliyoruz.
+ // Accept form-urlencoded and convert to object:
+app.use(express.urlencoded({ extended: true }));
+
+```
+
+###
+
+```jsx
 
 ```
 

@@ -6,11 +6,19 @@
 
 const Todo = require("../models/todo.model");
 
+// Buyuk harf ile yazma sebebim sabit bir veri yazdim ve  burayi degistirme onemli veriler ve
+// projeyi etkileyebilir.
+const PRIORITY = {
+  "-1": "Low",
+  0: "Norm",
+  1: "High",
+};
+
 module.exports = {
   list: async (req, res) => {
     // const data = await Todo.findAll()
     const data = await Todo.findAndCountAll();
-    console.log(data);
+    // console.log(data.rows);
 
     // res.status(200).send({
     //     error: false,
@@ -18,28 +26,44 @@ module.exports = {
     // })
 
     // View:
-    res.render("todoList");
+    res.render("todoList", {
+      todos: data.rows,
+      count: data.count,
+      priority: PRIORITY,
+    });
   },
 
   // CRUD:
 
   create: async (req, res) => {
-    // const receivedData = req.body
+    // const data = await Todo.create(req.body)
 
-    // const data = await Todo.create({
-    //     title: receivedData.title,
-    //     description: receivedData.description,
-    //     priority: receivedData.priority,
-    //     isDone: receivedData.isDone,
-    //     // newKey: 'newValue' // Modelde tanımlanmadığı için bir işe yaramayacaktır.
+    // res.status(201).send({
+    //     error: false,
+    //     result: data.dataValues
     // })
 
-    const data = await Todo.create(req.body);
+    console.log(req.method);
 
-    res.status(201).send({
-      error: false,
-      result: data.dataValues,
-    });
+    if (req.method == "POST") {
+      // CREATE:
+
+      const data = await Todo.create(req.body);
+
+      // errorHandler çalıştığı için hataYönetimi gerek yok:
+      // if (data) {
+      //     // return home:
+      //     res.redirect('/view') // List
+      // } else {
+      //     res.redirect('/view/create') // Create Form
+      // }
+
+      res.redirect("/view");
+    } else {
+      // VIEW:
+      // Form View:
+      res.render("todoCreate", { priority: PRIORITY });
+    }
   },
 
   read: async (req, res) => {
