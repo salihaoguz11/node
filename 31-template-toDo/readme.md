@@ -67,6 +67,77 @@ views klasoru icinde is "index.ejs" bir file olusturuyoruz.
 HTML dosyalarimin yerini gostermek icinde bu kodu yaziyoruz.
 HTML kodlarim bu klasorun icinde
 
+Daha sonra app sayfasina  bu kodlari ekliyoruz.
+Artik res.send yerine  res.render kullaniyoruz.
+Icine de parametre olarak ekranda gostermek istedigim dosyanin
+adini yaziyorum.
+app.all("/", (req, res) => {
+  // View Template:
+  // call ejs file in ./views/
+  // res.render('index.ejs')
+  res.render("index");
+});
 
+
+
+
+```
+
+### EJS TAG - <% %>
+
+```jsx
+ Ejs nin acilis etiketi <%
+ kapanis etiketi ise  %>
+ Ejs ne  zaman <%  ifadesini gorurse burada node js kodu oldugunu
+ yani dinamik bir oldugunu algiliyor. Ona gore degerlendirme yapiyor.
+ Ayni Reactta js kodunu {} icine    yazdigimiz gibi burada  da <% %>
+ Bu tag icine yaziyoruz. Bir tag icinde birden fazla satir yazabiliriz.
+
+      <% console.log('template running' %>)
+ Bu sekilde yazarsam eger sadece kendi terminalimde gorurum ama
+ browser console da gormuyorum.
+
+       <pre>   </pre>
+HTML de burada yazdigim gibi goster demek.
+Yazdigimiz koddaki bosluklar otomatik algilar.
+Trim yapmaz.
+
+```
+
+### EJS YAZIM KURALLARI
+
+```jsx
+
+ <%= %> =>Dinamik veri yazdirir. Ekrana yazi yazdiririz.
+ <%= '<p><b>Text</b></p>'  %>
+
+ <% %>  => Direk yazsin. Guvenli moda gerek yok.
+ <%- '<p><b>Text</b></p>' %>
+
+<%# commment %> => comment yazma
+
+<%%  %> => cancel template code
+<%% no template %> yazarsam
+ekranda cikti bu sekilde olur
+<% no template %>
+
+
+ <%- -%> =>  direct-print to html and remove newLine (\n)
+ Alt satira gecmeyi iptal ederiz.
+ <%- '<p><b>Text</b></p>' -%>
+
+
+
+```
+
+###
+
+```jsx
+
+```
+
+###
+
+```jsx
 
 ```

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to Home</h1>
+    <pre>
+           <!-- running JS - no print -->
+           <%
+            <!-- console.log('template running')
+            console.log('bla bla') -->
+        %>
+
+         <!--  safe-print to html -->
+           <%= '<p><b>Text</b></p>'  %>
+           <%= 2+5 %>
+
+         <!--  direct-print to html -->
+        <%- '<p><b>Text</b></p>' %>
+
+          <!-- comment - no print -->
+          <%# commment %>
+          <!-- cancel template code -->
+        <%% no template %>
+
+          <!--  direct-print to html and remove newLine (\n) -->
+          <%- '<p><b>Text</b></p>' -%>
+        </pre>
+
+
+
+
+
+    </pre>
+  </body>
+</html>
