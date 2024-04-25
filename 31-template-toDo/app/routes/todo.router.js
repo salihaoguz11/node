@@ -4,9 +4,9 @@
 ------------------------------------------------------- */
 // ROUTERS:
 
-const todo = require('../controllers/todo.controller')
+const todo = require("../controllers/todo.controller");
 
-const router = require('express').Router()
+const router = require("express").Router();
 
 // // List:
 // router.get('/', todo.list)
@@ -19,14 +19,13 @@ const router = require('express').Router()
 // // Delete:
 // router.delete('/:id', todo.delete)
 
-router.route('/')
-    .get(todo.list)
-    .post(todo.create)
+router.route("/").get(todo.list).post(todo.create);
 
-router.route('/:id')
-    .get(todo.read)
-    .put(todo.update)
-    .patch(todo.update)
-    .delete(todo.delete)
+router
+  .route("/:id")
+  .get(todo.read)
+  .put(todo.update)
+  .patch(todo.update)
+  .delete(todo.delete);
 
-module.exports = router
+module.exports = router;

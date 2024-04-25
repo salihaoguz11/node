@@ -35,8 +35,8 @@ app.all("/", (req, res) => {
 /* ------------------------------------------------------- */
 
 // Routes:
-
-app.use(require("./app/routes/todo.router"));
+app.use("/api", require("./app/routes/todo.router"));
+app.use("/view", require("./app/routes/todo.view.router"));
 
 /* ------------------------------------------------------- */
 // ErrorHandler:

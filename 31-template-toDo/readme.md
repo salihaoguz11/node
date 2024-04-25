@@ -67,10 +67,22 @@ views klasoru icinde is "index.ejs" bir file olusturuyoruz.
 HTML dosyalarimin yerini gostermek icinde bu kodu yaziyoruz.
 HTML kodlarim bu klasorun icinde
 
+
+// default template folder: ./views/
+app.set('views', './public')
+
+Default olarak views klasoru kullanilir. Ama ben baska
+bir klasoru de kullanabilirim.
+Views klasorunu degil public kulasarunu kullan diyoruz.
+
+
+
+
 Daha sonra app sayfasina  bu kodlari ekliyoruz.
 Artik res.send yerine  res.render kullaniyoruz.
 Icine de parametre olarak ekranda gostermek istedigim dosyanin
 adini yaziyorum.
+
 app.all("/", (req, res) => {
   // View Template:
   // call ejs file in ./views/
@@ -108,21 +120,25 @@ Trim yapmaz.
 
 ```jsx
 
- <%= %> =>Dinamik veri yazdirir. Ekrana yazi yazdiririz.
+1- <%= %> =>
+ Dinamik veri yazdirir. Ekrana yazi yazdiririz.
  <%= '<p><b>Text</b></p>'  %>
 
- <% %>  => Direk yazsin. Guvenli moda gerek yok.
+2-<% %>  =>
+ Direk yazsin. Guvenli moda gerek yok.
  <%- '<p><b>Text</b></p>' %>
 
 <%# commment %> => comment yazma
 
-<%%  %> => cancel template code
+3-<%%  %> =>
+cancel template code
 <%% no template %> yazarsam
 ekranda cikti bu sekilde olur
 <% no template %>
 
 
- <%- -%> =>  direct-print to html and remove newLine (\n)
+4-<%- -%> =>
+ direct-print to html and remove newLine (\n)
  Alt satira gecmeyi iptal ederiz.
  <%- '<p><b>Text</b></p>' -%>
 
@@ -133,6 +149,11 @@ ekranda cikti bu sekilde olur
 ###
 
 ```jsx
+
+Bu kodlari app js route kismina yapistiriyoruz.
+hem HTML cikti verecegiz hemde API de hizmeti verecegiz.
+app.use('/api', require('./app/routes/todo.router'))
+app.use('/view', require('./app/routes/todo.view.router'))
 
 ```
 
