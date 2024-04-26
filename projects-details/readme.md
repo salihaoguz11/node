@@ -17,7 +17,7 @@ env dosyasi bilgilerini yapistir.
 Mongodb yi ac
 Ekranda live gor.
 Mongodb de network access'e gir IP adresi kisminda edite sec ve
-0.0.0.0/o yaz ve  kaydet
+0.0.0.0/0 yaz ve  kaydet
 
 ```
 
