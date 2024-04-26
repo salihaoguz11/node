@@ -70,23 +70,36 @@ module.exports = {
     // const data = await Todo.findOne({ where: { id: req.params.id } })
     const data = await Todo.findByPk(req.params.id);
 
-    res.status(200).send({
-      error: false,
-      result: data,
-    });
+    // res.status(200).send({
+    //   error: false,
+    //   result: data,
+    // });
   },
 
   update: async (req, res) => {
-    // const data = await Todo.update({ ...newData }, { ...where })
-    const data = await Todo.update(req.body, { where: { id: req.params.id } });
+    if (req.method == "POST") {
+      //UPDATE
+      // const data = await Todo.update({ ...newData }, { ...where })
+      const data = await Todo.update(req.body, {
+        where: { id: req.params.id },
+      });
+      res.redirect("/view");
+    } else {
+      // VIEW:
 
-    res.status(202).send({
-      error: false,
-      message: "Updated",
-      body: req.body, // Gönderdiğim veriyi göster.
-      result: data,
-      new: await Todo.findByPk(req.params.id), // Güncellenmiş veriyi de göster.
-    });
+      const data = await Todo.findByPk(req.params.id);
+      // console.log(data.dataValues);
+      res.render("todoRead", { todo: data.dataValues, priority: PRIORITY });
+    }
+
+    // res.status(202).send({
+    //   error: false,
+    //   message: "Updated",
+    //   body: req.body, // Gönderdiğim veriyi göster.
+    //   result: data,
+    //   new: await Todo.findByPk(req.params.id), // Güncellenmiş veriyi de göster.
+    // });
+    res.render("todoUpdate", { todo: data.dataValues, priority: PRIORITY });
   },
 
   delete: async (req, res) => {

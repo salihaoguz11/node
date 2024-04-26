@@ -26,4 +26,8 @@ router.all("/create", todo.create);
 //formu gormek icin once get yapiyorum.
 //Burada hem get hemde post yaptigim icin all kullanirim.
 
+router.all("/:id", todo.read);
+
+router.all("/:id/update", todo.update);
+
 module.exports = router;
