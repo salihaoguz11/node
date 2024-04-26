@@ -181,6 +181,10 @@ app.use(express.urlencoded({ extended: true }));
 ###
 
 ```jsx
+ Proje public klasorunde  _header ve _footer file olusturup butun sayfalardas ortak olan
+ satirlari topluyoruz ve istedigim sayfada kullaniyoruz.
+
+ Ayrica Error handler api ve view formatina gore guncellendi.
 
 ```
 

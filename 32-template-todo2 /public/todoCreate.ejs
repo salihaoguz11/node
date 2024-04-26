@@ -1,64 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODO CREATE</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-  </head>
+<%- include('_header') -%>
 
-  <body>
-    <br />
-    <br />
-    <div class="container">
-      <div class="row">
-        <h1>TODO CREATE</h1>
-        <p>
-          <a class="btn btn-sm btn-secondary" href="/view">List Todos</a>
-        </p>
-        <!-- action action="" bos birakilirsa kendi url si demek  -->
-        <form action="" method="POST">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <td>Priority</td>
-                <td>
-                  <select class="form-select" name="priority">
-                    <% for (let key in priority) { %>
-                    <option value="<%= key %>"><%= priority[key] %></option>
-                    <%} %>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>Title</td>
-                <td>
-                  <input
-                    type="text"
-                    name="title"
-                    required
-                    class="form-control"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Description</td>
-                <td>
-                  <textarea name="description" class="form-control"></textarea>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <p>
-            <button class="btn btn-primary" type="submit">CREATE</button>
-          </p>
-        </form>
-      </div>
-    </div>
-  </body>
-</html>
+<h1>TODO CREATE</h1>
+<p>
+  <a class="btn btn-sm btn-secondary" href="/view">List Todos</a>
+</p>
+<form action="" method="POST">
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td>Priority</td>
+        <td>
+          <select class="form-select" name="priority">
+            <% for (let key in priority) { %>
+            <option value="<%= key %>"><%= priority[key] %></option>
+            <% } %>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Title</td>
+        <td>
+          <input type="text" name="title" required class="form-control" />
+        </td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>
+          <textarea name="description" class="form-control"></textarea>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <button class="btn btn-primary" type="submit">CREATE</button>
+  </p>
+</form>
+
+<%- include('_footer') -%>

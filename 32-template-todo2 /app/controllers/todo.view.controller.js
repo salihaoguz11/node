@@ -74,6 +74,8 @@ module.exports = {
     //   error: false,
     //   result: data,
     // });
+    // console.log(data.dataValues)
+    res.render("todoRead", { todo: data.dataValues, priority: PRIORITY });
   },
 
   update: async (req, res) => {
