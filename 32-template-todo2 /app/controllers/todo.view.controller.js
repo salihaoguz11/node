@@ -89,7 +89,7 @@ module.exports = {
 
       const data = await Todo.findByPk(req.params.id);
       // console.log(data.dataValues);
-      res.render("todoRead", { todo: data.dataValues, priority: PRIORITY });
+      res.render("todoUpdate", { todo: data.dataValues, priority: PRIORITY });
     }
 
     // res.status(202).send({
@@ -99,7 +99,6 @@ module.exports = {
     //   result: data,
     //   new: await Todo.findByPk(req.params.id), // Güncellenmiş veriyi de göster.
     // });
-    res.render("todoUpdate", { todo: data.dataValues, priority: PRIORITY });
   },
 
   delete: async (req, res) => {
@@ -118,7 +117,8 @@ module.exports = {
       // Silme gerçekleşti ise:
       // res.status(204).send()
       //? Sadece status çıktı ver:
-      res.sendStatus(204);
+      // res.sendStatus(204);
+      res.redirect("/view");
     } else {
       // Silme gerçekleşmedi ise:
       // res.status(404).send({
