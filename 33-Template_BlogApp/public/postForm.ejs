@@ -1,0 +1,66 @@
+{%- include('incHeader') %}
+</div>
+<!-- main start -->
+<main class="container">
+    <div class="row g-5">
+        <div class="col-md-12 p-3">
+            <p>
+                <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
+            </p>
+            <h1>Title</h1>
+            <form action="" method="POST">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th># 1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Category</td>
+                            <td>
+                                <select name="blogCategoryId" class="form-select">
+                                    <option value="1">CategoryName</option>
+                                    <option value="1">CategoryName</option>
+                                    <option value="1">CategoryName</option>
+                                    <option value="1">CategoryName</option>
+                                    <option value="1">CategoryName</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td><input type="text" name="title" required class="form-control" value=""></td>
+                        </tr>
+                        <tr>
+                            <td>Content</td>
+                            <td>
+                                <textarea name="content" class="form-control"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Published</td>
+                            <td>
+                                <select name="published" class="form-select">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Created</td>
+                            <td>2022-10-10</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <button class="btn btn-primary" type="submit">SUBMIT</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- main end -->
+
+{%- include('incFooter') %}

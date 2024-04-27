@@ -1,0 +1,37 @@
+{%- include('incHeader') %}
+</div>
+<!-- main start -->
+<main class="container">
+    <div class="row g-5">
+        <div class="col-md-12 p-3">
+            <p>
+                <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
+            </p>
+            <h1>LOGIN</h1>
+            <form action="" method="POST">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>E-Mail</td>
+                            <td><input type="text" name="email" required class="form-control" value="test@test.com"></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="password" required class="form-control" value="12345678"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><label><input type="checkbox" name="rememberMe" value="1"> Remember Me</label></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- main end -->
+
+{%- include('incFooter') %}
