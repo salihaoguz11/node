@@ -57,12 +57,12 @@ app.all("/", (req, res) => {
 });
 
 // Routes: // VIEWS:
-// app.use("/user", require("./src/routes/views/userRoute"));
-// app.use("/blog", require("./src/routes/views/blogRoute"));
+app.use("/views/user", require("./src/routes/views/userRoute"));
+app.use("/views/blog", require("./src/routes/views/blogRoute"));
 
-// // Routes: // API:
-// app.use("/user", require("./src/routes/api/userRoute"));
-// app.use("/blog", require("./src/routes/api/blogRoute"));
+// Routes: // API:
+app.use("/api/user", require("./src/routes/api/userRoute"));
+app.use("/api/blog", require("./src/routes/api/blogRoute"));
 
 /* ------------------------------------------------------- */
 // Synchronization:

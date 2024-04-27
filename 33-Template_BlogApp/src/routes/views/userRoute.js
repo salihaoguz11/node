@@ -1,28 +1,24 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     EXPRESSJS - BLOG Project with Mongoose
 ------------------------------------------------------- */
 
-const router = require('express').Router()
+const router = require("express").Router();
 
-const { User } = require('../controllers/userController')
+const { User } = require("../../controllers/views/userController");
 
 // ------------------------------------------
 // User
 // ------------------------------------------
 
 // Login/logout:
-router.post('/login', User.login)
-router.all('/logout', User.logout)
+router.all("/login", User.login);
+router.all("/logout", User.logout);
 
+router.all("/", User.list);
+router.all("/create", User.create);
+router.all("/:id", User.read);
+router.all("/:id/update", User.update);
+router.all("/:id/delete", User.delete);
 
-router.route('/')
-    .get(User.list)
-    .post(User.create)
-
-router.route('/:userId')
-    .get(User.read)
-    .put(User.update)
-    .delete(User.delete)
-
-module.exports = router
+module.exports = router;
