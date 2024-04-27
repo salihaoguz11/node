@@ -49,6 +49,11 @@ BE_FE beraberse "Cookie - session "ile hallederiz
 
 ```jsx
 
+href="{%= pageUrl %}&page=1"
+
+href te ki linke ? isaretiyle baslarsan onceki qury ler hider. mesela query kismina limit=3 yazmissan
+Yani sayfa basina 3 veri getir demissen onu iptal eder ve sayfa basi orjinal miktarda veri gelir
+Bizde bunu iptal icin bu tarz bir sekilde yazdik
 ```
 
 ###

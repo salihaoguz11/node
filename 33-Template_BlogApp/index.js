@@ -26,8 +26,8 @@ const PORT = process.env.PORT || 8000;
 app.set("view engine", "ejs");
 app.set("view options", {
   // delimiter: '%',
-  openDelimeter: "{",
-  closeDelimeter: "}",
+  openDelimiter: "{",
+  closeDelimiter: "}",
 });
 app.set("views", "./public");
 
@@ -53,7 +53,7 @@ app.use(require("./src/middlewares/findSearchSortPage"));
 // HomePage:
 app.all("/", (req, res) => {
   res.redirect("/views/blog/post");
-  //   res.send("WELCOME TO BLOG API");
+  // res.send('<h1>Welcome to Blog APP</h1>')
 });
 
 // Routes: // VIEWS:
@@ -64,9 +64,12 @@ app.use("/views/blog", require("./src/routes/views/blogRoute"));
 app.use("/api/user", require("./src/routes/api/userRoute"));
 app.use("/api/blog", require("./src/routes/api/blogRoute"));
 
+// StaticFiles:
+app.use("/assets", express.static("./public/assets"));
+
 /* ------------------------------------------------------- */
 // Synchronization:
-// require('./src/sync')()
+// require("./src/sync")();
 
 // errorHandler:
 app.use(require("./src/errorHandler"));

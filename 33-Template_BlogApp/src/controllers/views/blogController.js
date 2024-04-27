@@ -114,11 +114,34 @@ module.exports.BlogPost = {
 
     const data = await res.getModelList(BlogPost, "blogCategoryId");
 
-    res.status(200).send({
-      error: false,
-      count: data.length,
+    // res.status(200).send({
+    //   error: false,
+    //   count: data.length,
+    //   details: await res.getModelListDetails(BlogPost),
+    //   result: data,
+    // });
+
+    const categories = await BlogCategory.find();
+    // // Recent Posts:
+
+    const recentPosts = await BlogPost.find()
+      .sort({ createdAt: "desc" })
+      .limit(3);
+
+    // Url içinde page=x temizle:
+    const pageUrl = req.originalUrl.replace(/[?|&]page=([^&]+)/gi, "");
+    //replace yazmazsak eger butun queryleri araliksiz ekler. Her sayfayi ekleye ekleye gider.
+    //http://127.0.0.1:8000/views/blog/post?&page=9&page=8&page=10
+    console.log(pageUrl);
+
+    res.render("index", {
+      categories,
+      posts: data,
+      recentPosts,
       details: await res.getModelListDetails(BlogPost),
-      result: data,
+      pageUrl: pageUrl.includes("?") ? pageUrl : pageUrl + "?",
+      // http://127.0.0.1:8000/views/blog/post&page=7 without uperline
+      //http://127.0.0.1:8000/views/blog/post?&page=9  with uperline
     });
   },
 
