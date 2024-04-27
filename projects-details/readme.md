@@ -92,7 +92,7 @@ Ve kopyaladigin bu dosyalari o dosyanin icine yapistir.
 
 5- Mongodb de ki url i al. Ve env dosyasinda mongodb sifresinin karsisina  yaz.
 Database/ connect/compass ve orada ki linki al.Mongodb de network accesse gir
-IP adresi kisminda edite sec ve 0.0.0.0/o yaz ve  kaydet
+IP adresi kisminda edite sec ve 0.0.0.0/0 yaz ve  kaydet
 Eger bir database yoksa olustur.
 
 6- Backend ana index sayfasinda ki route bolumunu bu sekilde guncelle
@@ -166,11 +166,79 @@ app.get("*", (req, res) => {
 
 ```
 
+## 3-AYNI KLASOR ORTAMI VE DOCKER ILE DEPLOY - STOCK API
+
+## DOCERIZE
+
 ```jsx
+
+Backend dosyasi ve forntend dosyasi ayni dosyada olacak.
+
+1- Backend de terminal ac ve $ npm i  diyoruz.
+2- Ana dizimde logs klasoru olustur.
+3- env dosyasini olustur yada duzenle.
+
+env ye bu kodu yapistir. Docker icinden disarida ki bir local hosta baglanti kuruyoruz.
+Bu sebeple bu kodu yaziyoruz ve mongo db ye baglaniyoruz.
+MONGODB=mongodb://host.docker.internal:27017/stockAPI
+
+Ama remote taki db ye baglanacaksak eski halinda birakabilirz.
+# MONGODB=mongodb+srv://qadir:uKcF6V6InKg75w9q@cluster0.um9yyhm.mongodb.net/stockAPI
+
+
+4- package json da
+nodemon yazisi yerine node index js olarak degistir
+  "scripts": {
+    "start": "node index.js",
+    "debug": "DEBUG=* node index.js"
+  },
+
+  nodemon yap ve projeyi calistir. Dababase not connected yaziyor cunku
+  container yapisini henuz olusturmadik
+
+  Daha sonra ekranda cikti olursa CTRL + C yap terminali durdur.
+
+  Ana dizinde dockerignore dosyasi olustur.
+
+
 
 ```
 
 ```jsx
+
+1- Frontend dosyasina gec ve terminali ac ve
+
+ $ npm i  kodunu yaz yada
+ $ pnpm i yaz (vite ise)
+
+
+2- package json da burayi guncelle 0.0.0.0 yaz. Asagida ki gibi
+
+ "scripts": {
+    "start": "vite --host 0.0.0.0",}
+
+3- Ana dizinde dockerignore dosyasi olustur. Ve icindekileri kopyala yapistir.
+
+4- $ npm run dev yaz terminale
+
+5-  Daha sonra ekranda cikti olursa CTRL + C yap terminali durdur.
+
+6- Frontend ve backend ana dizininde ayri ayri dockerfile olustur.
+
+7- Ana  terminali ac ve  $  docker build ./backend -t backend  yaziyoruz.
+
+8- $ docker run --name backend -p 7000:8000  backend
+
+icerdeki 8000 i disarida ki 7000 e yonlendir.
+
+$ docker run -d -p <ext_port_number>:<int_port_number> --name <container_name> <image_name>
+
+* DB Connected *
+* Synchronized. yazacak terminalde
+
+9- Docker logosunu tikla container yesil renkli olacak ve saga tikla stop de
+
+
 
 ```
 
